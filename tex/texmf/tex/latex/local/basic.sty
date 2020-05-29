@@ -73,39 +73,42 @@
 % Load the PostScript fonts we want to use (Requires XeLatex or LauLatex)
 
 \RequirePackage{fontspec}
-\setsansfont%
-[
-  Path           = "/home/mbailey/texmf/fonts/",
-  BoldFont       = ArialBold.ttf,
-  ItalicFont     = ArialItalic.ttf,
-  BoldItalicFont = ArialBoldItalic.ttf,
-  Scale          = .9,
-]{Arial.ttf}
-\setmonofont%
-[
-  Path           = "/home/mbailey/texmf/fonts/",
-  BoldFont       = ConsolasBold.ttf,
-  ItalicFont     = ConsolasItalic.ttf, 
-  BoldItalicFont = ConsolasBoldItalic.ttf,
-  Scale          = .9,
-]{Consolas.ttf}
-\setmainfont%
-[
-  Path           = "/home/mbailey/texmf/fonts/",
-  BoldFont       = ACaslonPro-Semibold.otf, 
-  ItalicFont     = ACaslonPro-Italic.otf, 
-  BoldItalicFont = ACaslonPro-SemiboldItalic.otf,
-]{ACaslonPro-Regular.otf}
-\newfontfamily\comic%
-[
-  Path           = "/home/mbailey/texmf/fonts/",
-  Scale          = .7,
-]{ComicSansMS.ttf}
+%\setsansfont%
+%[
+%  Path           = "/home/mbailey/texmf/fonts/",
+%  BoldFont       = ArialBold.ttf,
+%  ItalicFont     = ArialItalic.ttf,
+%  BoldItalicFont = ArialBoldItalic.ttf,
+%  Scale          = .9,
+%]{Arial.ttf}
+%\setmonofont%
+%[
+%  Path           = "/home/mbailey/texmf/fonts/",
+%  BoldFont       = ConsolasBold.ttf,
+%  ItalicFont     = ConsolasItalic.ttf, 
+%  BoldItalicFont = ConsolasBoldItalic.ttf,
+%  Scale          = .9,
+%]{Consolas.ttf}
+%\setmainfont%
+%[
+%  Path           = "/home/mbailey/texmf/fonts/",
+%  BoldFont       = ACaslonPro-Semibold.otf, 
+%  ItalicFont     = ACaslonPro-Italic.otf, 
+%  BoldItalicFont = ACaslonPro-SemiboldItalic.otf,
+%]{ACaslonPro-Regular.otf}
+%\newfontfamily\comic%
+%[
+%  Path           = "/home/mbailey/texmf/fonts/",
+%  Scale          = .7,
+%]{ComicSansMS.ttf}
+%\newfontfamily\popl%
+%[
+%  Path           = "/home/mbailey/texmf/fonts/",
+%]{PYM____.PFB}
+%%\input{PSFonts} % Requires XeLatex or LauLatex
+
 \newfontfamily\popl%
-[
-  Path           = "/home/mbailey/texmf/fonts/",
-]{PYM____.PFB}
-%\input{PSFonts} % Requires XeLatex or LauLatex
+{Arial}
 
 
 
@@ -220,9 +223,9 @@ Jan.\or Feb.\or Mar.\or Apr.\or May\or Jun.\or Jul.\or Aug.\or Sep.\or Oct.\or N
 
 \input{CourseInfo}
 
-\def \thedatesemester {\ifnum \theSemesterStartMonth>6 Fall \else Spring \fi}
+\def \thedatesemester {\ifnum \theSemesterStartMonth>6 Fall\else Spring\fi}
 
-\CourseSemester {\thedatesemester~\theSemesterStartYear}
+\CourseSemester {\thedatesemester\ \theSemesterStartYear}
 
 % Get the course information settings from the local file in the directory...
 

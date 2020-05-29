@@ -2,7 +2,7 @@
 	@echo -n
 
 %.pdf: %.tex
-	TEXINPUTS=$$TEXINPUTS:../config latexmk -xelatex -pvc -f $<
+	TEXINPUTS=.:../tex/config/:../tex/texmf/tex/latex/local/: latexmk -xelatex -pvc -f $<
 
 %.clean:
 	/bin/rm -f $*.pdf $*.aux $*.fdb_latexmk $*.fls $*.log $*.xdv
