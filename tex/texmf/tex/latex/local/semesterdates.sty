@@ -1,0 +1,147 @@
+\ProvidesPackage{semesterdates}
+
+\DeclareOption*{\PackageWarning{basic}{Unknown ‘\CurrentOption’}}
+\ProcessOptions\relax
+
+\RequirePackage{ifthen}
+\RequirePackage{datenumber}
+\RequirePackage{calc}
+
+\newcounter{datenumbersave}
+
+\newcounter{SpringBreakStartDateNumber}
+\newcounter{SpringBreakMidDateNumber}
+\newcounter{SpringBreakEndDateNumber}
+\setcounter{SpringBreakStartDateNumber}{0}
+\newcommand{\SpringBreakStartDate}[3]{%
+\setmydatenumber{SpringBreakStartDateNumber}{#1}{#2}{#3}%
+\MakeSunday{SpringBreakStartDateNumber}%
+\setcounter{SpringBreakEndDateNumber}{\value{SpringBreakStartDateNumber}}%
+\addtocounter{SpringBreakEndDateNumber}{13}%
+\setcounter{SpringBreakMidDateNumber}{\value{SpringBreakStartDateNumber}}%
+\addtocounter{SpringBreakMidDateNumber}{7}%
+}
+
+\newcounter{ThanksgivingStartDateNumber}
+\newcounter{ThanksgivingEndDateNumber}
+\setcounter{ThanksgivingStartDateNumber}{0}
+\newcommand{\ThanksgivingDate}[3]{%
+\setmydatenumber{ThanksgivingStartDateNumber}{#1}{#2}{#3}%
+\MakeSunday{ThanksgivingStartDateNumber}%
+\setcounter{ThanksgivingEndDateNumber}{\value{ThanksgivingStartDateNumber}}%
+\addtocounter{ThanksgivingEndDateNumber}{6}%
+}
+
+\newcounter{FallBreakStartDateNumber}
+\newcounter{FallBreakEndDateNumber}
+\setcounter{FallBreakStartDateNumber}{0}
+\newcommand{\FallBreakStartDate}[3]{%
+\setmydatenumber{FallBreakStartDateNumber}{#1}{#2}{#3}%
+\setcounter{FallBreakEndDateNumber}{\value{FallBreakStartDateNumber}}%
+\addtocounter{FallBreakEndDateNumber}{3}%
+}
+
+
+\newcounter{SemesterStartYear}
+\newcounter{SemesterStartMonth}
+\newcounter{SemesterStartDay}
+\newcounter{SemesterStartDateNumber}
+\newcommand{\SemesterStartDate}[3]{%
+\setcounter{SemesterStartYear}{#1}%
+\setcounter{SemesterStartMonth}{#2}%
+\setcounter{SemesterStartDay}{#3}%
+\setmydatenumber{SemesterStartDateNumber}{#1}{#2}{#3}%
+}
+
+\newcounter{springBreakWeekOne}
+\newcounter{weekCounter}
+\newcommand{\SemesterDateNumberByWeek}[2]{%
+\setcounter{#1}{\value{SemesterStartDateNumber}}%
+\MakeMonday{#1}%
+\setcounter{springBreakWeekOne}{-1}%
+\setcounter{weekCounter}{0}%
+\whiledo{\value{weekCounter}<#2}{%
+\addtocounter{#1}{7}%
+\ifthenelse{\value{#1} > \value{SpringBreakStartDateNumber} \AND \value{#1} < \value{SpringBreakMidDateNumber}}{%
+\setcounter{springBreakWeekOne}{\value{weekCounter}}%
+\addtocounter{springBreakWeekOne}{1}%
+}{%
+\ifthenelse{\value{#1} > \value{ThanksgivingStartDateNumber} \AND \value{#1} < \value{ThanksgivingEndDateNumber}}{}{%
+\addtocounter{weekCounter}{1}%
+}%
+}%
+}%
+\ifthenelse{#2 = \value{springBreakWeekOne}}{\addtocounter{#1}{-14}}{}%
+\MakeSunday{#1}%
+}
+
+
+% Gets the day of the week (as a number) for the given counter
+\newcounter{DayOfWeekResult}
+\newcommand{\DayOfWeek}[1]{%
+\setcounter{datenumbersave}{\value{datenumber}}%
+\setdatebynumber{\value{#1}}%
+\setcounter{DayOfWeekResult}{\thedatedayname}%
+\ifthenelse{\value{DayOfWeekResult} = 7}{%
+\setcounter{DayOfWeekResult}{0}}{}%
+\setdatebynumber{\value{datenumbersave}}%
+}
+
+% Makes a given date counter the Monday of that week
+
+\newcounter{MakeMondayResult}
+\setcounter{MakeMondayResult}{0}
+\newcommand{\MakeMonday}[1]{%
+\setcounter{MakeMondayResult}{\value{#1}}%
+\DayOfWeek{#1}%
+\addtocounter{MakeMondayResult}{-\value{DayOfWeekResult}+1}%
+\setcounter{#1}{\value{MakeMondayResult}}%
+}
+
+% Makes a given date counter the Sunday of that week
+
+\newcounter{MakeSundayResult}
+\setcounter{MakeSundayResult}{0}
+\newcommand{\MakeSunday}[1]{%
+\setcounter{MakeSundayResult}{\value{#1}}%
+\DayOfWeek{#1}%
+\addtocounter{MakeSundayResult}{-\value{DayOfWeekResult}}%
+\setcounter{#1}{\value{MakeSundayResult}}%
+}
+
+% Displays the date for the given counter
+
+\newcommand{\mydisplaydate}[1]{ %
+\setcounter{datenumbersave}{\value{datenumber}} %
+\setdatebynumber{\value{#1}} %
+\datedayname, \datedate %
+\setdatebynumber{\value{datenumbersave}} %
+}
+
+\newcounter{tempDate}
+\newcommand{\SemesterDateShort}[2]{%
+% #1 - Day of week
+% #2 - Week of semester
+\setcounter{datenumbersave}{\value{datenumber}}%
+\SemesterDateNumberByWeek{tempDate}{#2}
+\addtocounter{tempDate}{#1}
+\setdatebynumber{\value{tempDate}}%
+\shortdatedate%
+\setdatebynumber{\value{datenumbersave}}%
+}
+
+\newcommand{\SemesterDate}[2]{%
+% #1 - Day of week
+% #2 - Week of semester
+\setcounter{datenumbersave}{\value{datenumber}}%
+\SemesterDateNumberByWeek{tempDate}{#2}%
+\addtocounter{tempDate}{#1}%
+\setdatebynumber{\value{tempDate}}%
+\datedayname, \datedate%
+\setdatebynumber{\value{datenumbersave}}%
+}
+
+\newcommand{\shortdatedate}{%
+\ifcase\thedatemonth \or%
+Jan.\or Feb.\or Mar.\or Apr.\or May\or Jun.\or Jul.\or Aug.\or Sep.\or Oct.\or Nov.\or Dec.\fi\ \thedateday%
+}

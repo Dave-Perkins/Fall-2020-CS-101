@@ -1,0 +1,68 @@
+\ProvidesPackage{lab}
+
+%\AtBeginDocument...for title, etc.?
+
+\newcommand{\usenameline}{\RequirePackage{basic}}
+
+\DeclareOption{nameline}{\renewcommand{\usenameline}{\RequirePackage[nameline]{basic}}}
+
+\DeclareOption*{\PackageWarning{lab}{Unknown ‘\CurrentOption’}}
+
+\ProcessOptions\relax
+
+%-----------------------------------------------------------------------
+
+\usenameline
+
+
+% Macros
+
+\lstset{ 
+    style = project
+}
+
+\newcounter{SemesterWeek}
+\newcommand{\duedatepreproject}[8]{%
+  \textbf{Assigned:} \SemesterDate{#1}{#2} \\ %
+  \textbf{Pre-project write-up due:} #5, \SemesterDate{#3}{#4} \\%
+  \textbf{Due:} #8, \SemesterDate{#6}{#7} %
+  \setcounter{SemesterWeek}{#2}
+}
+\newcommand{\duedate}[5]{%
+  \textbf{Assigned:} \SemesterDate{#1}{#2} \\ %
+  \textbf{Due:} #5, \SemesterDate{#3}{#4} %
+  \setcounter{SemesterWeek}{#2}
+}
+\newcommand{\doubleduedate}[9]{%
+  \textbf{Assigned:} \SemesterDate{#1}{#2} \\ %
+  \textbf{Due:} #5, \SemesterDate{#3}{#4} #6 \\ %
+  \textbf{Due:} #9, \SemesterDate{#7}{#8} %
+}
+
+%\fancypagestyle{plain}{%
+%    \fancyhf{}% clear all the header and footer fields
+%    \fancyhead[L]{\CourseNumberString\\ \CourseSemesterString}%
+%    \fancyhead[R]{\namelineformat}
+%    \fancyfoot[R]{\tiny Week \theSemesterWeek}%
+%    \renewcommand{\headrulewidth}{0pt}%
+%}
+
+\newcommand{\includecode}[2][]{\begin{quote}\lstinputlisting[#1]{#2}\end{quote}}
+
+\newcommand{\DOS}[1]%
+{\typethis[\lstinline{C:\\>}]{#1}}
+
+\newcommand{\itypethis}[2][]%
+{#1 \lstinline{#2}}
+
+\newcommand{\unixprompt}{\lstinline{[user@gemini ~]$}}
+
+\newcommand{\unix}[2][\unixprompt]%
+{#1 \lstinline{#2}}
+
+\newcommand{\iDOS}[1]%
+{\itypethis[\emph{type\guillemotright }]{#1}}
+%\newcommand{\iDOS}[1]%
+%{\itypethis[\emph{type\guillemotright }]{#1}}
+
+\endinput

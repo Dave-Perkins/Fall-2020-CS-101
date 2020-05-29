@@ -1,0 +1,28 @@
+# Fdb version 3
+["latex"] 1590760359 "project.tex" "project.dvi" "project" 1590760359
+  "/usr/local/texlive/2017/texmf-dist/fonts/map/fontname/texfonts.map" 1480098670 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
+  "/usr/local/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmr10.tfm" 1480098701 1296 45809c5a464d5f32c8f98ba97c1bb47f ""
+  "/usr/local/texlive/2017/texmf-dist/tex/latex/base/article.cls" 1480098821 19821 310da678527a7dfe2a02c88af38079b7 ""
+  "/usr/local/texlive/2017/texmf-dist/tex/latex/base/size11.clo" 1480098821 8308 f91506bb4df6d8527331f7bbeaf0e63c ""
+  "/usr/local/texlive/2017/texmf-dist/web2c/texmf.cnf" 1494087824 32646 eadc4ca26cdbe7105ac7c593aa8c4f72 ""
+  "/usr/local/texlive/2017/texmf-var/web2c/pdftex/latex.fmt" 1495593496 4129530 100bcec0d3b9ae9e2515b234bc2a0fc5 ""
+  "/usr/local/texlive/2017/texmf.cnf" 1495593465 577 2b71d4d888f9e5560b2e99985915a9fa ""
+  "project.aux" 1590760359 8 a94a2480d3289e625eea47cd1b285758 ""
+  "project.sty" 0 -1 0 ""
+  "project.tex" 1590759684 620 a9fbc9b39dc0034fef343ef3a827afaa ""
+  (generated)
+  "project.dvi"
+  "project.log"
+["xdvipdfmx"] 0 "project.xdv" "project.pdf" "project" 0
+  "project.xdv" 0 -1 0 "xelatex"
+  (generated)
+  "project.pdf"
+["xelatex"] 1590760498 "project.tex" "project.xdv" "project" 1590760513
+  "/usr/local/texlive/2017/texmf-dist/tex/latex/base/article.cls" 1480098821 19821 310da678527a7dfe2a02c88af38079b7 ""
+  "/usr/local/texlive/2017/texmf-dist/tex/latex/base/size11.clo" 1480098821 8308 f91506bb4df6d8527331f7bbeaf0e63c ""
+  "lab.sty" 0 -1 0 ""
+  "project.aux" 1590760359 8 a94a2480d3289e625eea47cd1b285758 ""
+  "project.tex" 1590760388 616 951307902aabc0aed93d63e9d7d85b2e ""
+  (generated)
+  "project.xdv"
+  "project.log"

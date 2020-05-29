@@ -1,0 +1,116 @@
+\ProvidesPackage{syllabus}
+
+%\AtBeginDocument...for title, etc.?
+
+\newcommand{\usenameline}{\RequirePackage{basic}}
+
+\DeclareOption{nameline}{\renewcommand{\usenameline}{\RequirePackage[nameline]{basic}}}
+
+\DeclareOption*{\PackageWarning{syllabus}{Unknown ‘\CurrentOption’}}
+
+\ProcessOptions\relax
+
+%-----------------------------------------------------------------------
+
+\usenameline
+
+
+% Macros
+
+\RequirePackage{longtable}
+\RequirePackage{hyperref}
+
+\newcommand{\Tstrut}{\rule{0pt}{2.6ex}}       % Top strut
+\newcommand{\Bstrut}{\rule[-1.2ex]{0pt}{0pt}} % Bottom strut
+\newcommand{\TBstrut}{\Tstrut\Bstrut}
+
+\newcounter{HWCounter}
+\newcommand{\hw}[1][1]{%
+\addtocounter{HWCounter}{#1}%
+Homework~\theHWCounter %
+}
+
+\newcounter{PJCounter}
+\newcommand{\proj}[1][1]{%
+Project~\thePJCounter %
+\addtocounter{PJCounter}{#1}%
+}
+\newcommand{\preproj}{%
+Pre-Project~\thePJCounter %
+}
+
+\newcounter{LABCounter}
+\newcommand{\lab}[1][1]{%
+\addtocounter{LABCounter}{#1}%
+Lab~\theLABCounter %
+}
+
+\newcounter{QUIZCounter}
+\newcommand{\quiz}[1][1]{%
+\addtocounter{QUIZCounter}{#1}%
+Quiz~\theQUIZCounter %
+}
+
+\newcounter{EXAMCounter}
+\newcommand{\exam}[1][1]{%
+\addtocounter{EXAMCounter}{#1}
+Exam~\theEXAMCounter %
+}
+
+\newcommand{\adddays}[1][7]{%
+\addtocounter{datenumber}{#1}%
+\setdatebynumber{\thedatenumber}%
+\mydatedate
+}
+
+%\newcommand{\semesterDateShort}[2]{%
+%    % #1 - day of the week (0-6)
+%    % #2 - week of the semester (0-16?)
+%  \weekToDateHelper{#2}%
+%  % Shift to the specified day of the week (probably a bug here)
+%  \addtocounter{WeekToDateResult}{#1}%
+%  \setdatebynumber{\value{WeekToDateResult}}%
+%  \shortMonth{\thedatemonth}%
+%  \setdatebynumber{\value{datenumberSave}}% Restore the current date
+%}
+
+\newcounter{WTCyear}
+\newcounter{WTCmonth}
+\newcounter{WTCday}
+\newcommand{\weekToClass}[1]{%
+  % Get the date of Sunday
+  \weekToDateHelper{#1}%
+  % Get the date of Monday
+  \addtocounter{WeekToDateResult}{1}%
+  \setdatebynumber{\value{WeekToDateResult}}%
+  \setcounter{WTCyear}{\value{dateyear}}%
+  \setcounter{WTCmonth}{\value{datemonth}}%
+  \setcounter{WTCday}{\value{dateday}}%
+  \setdatebynumber{\value{datenumberSave}}% Restore the current date
+  \ClassNumber{\value{WTCyear}}{\value{WTCmonth}}{\value{WTCday}}%
+}
+
+\newcounter{WeekCounter}
+%\stepcounter{WeekCounter}
+\newcommand{\calweek}[3][\theWeekCounter]{%
+%  \textsf{\weekToClass{\theWeekCounter} \TBstrut} & %
+  \textsf{#1 \TBstrut} & %
+%  \textsf{\adddays[#1]} & %
+  \textsf{\SemesterDateShort{0}{\theWeekCounter}} & %
+  \begin{minipage}[t]{2.75in} %
+    \raggedright\textsf{#2} \TBstrut %
+  \end{minipage} & %
+  \begin{minipage}[t]{2in} %
+    \textsf{#3} \TBstrut%
+  \end{minipage} %
+  \stepcounter{WeekCounter} \\ \hline%
+}
+
+\newcommand{\mydatedate}{%
+\ifcase\thedatemonth \or
+Jan.\or Feb.\or Mar.\or Apr.\or May\or Jun.\or Jul.\or Aug.\or Sep.\or Oct.\or Nov.\or Dec.\fi\ \thedateday
+}
+
+
+
+\endinput

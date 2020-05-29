@@ -1,0 +1,37 @@
+\ProvidesPackage{homework}
+
+%\AtBeginDocument...for title, etc.?
+
+\newcommand{\usenameline}{}
+\newcommand{\showkey}{}
+
+\DeclareOption{nameline}{\renewcommand{\usenameline}{,nameline}}
+\DeclareOption{key}{\renewcommand{\showkey}{,key}}
+
+\DeclareOption*{\PackageWarning{homework}{Unknown ‘\CurrentOption’}}
+
+\ProcessOptions\relax
+
+%-----------------------------------------------------------------------
+
+\RequirePackage[blank\usenameline\showkey]{basic}
+
+
+% Macros
+
+\newcounter{SemesterWeek}
+\newcommand{\duedate}[5]{%
+  \textbf{Assigned:} \SemesterDate{#1}{#2} \\ %
+  \textbf{Due:} #5, \SemesterDate{#3}{#4} %
+  \setcounter{SemesterWeek}{#2}
+}
+
+\fancypagestyle{plain}{%
+    \fancyhf{}% clear all the header and footer fields
+    \fancyhead[L]{\CourseNumberString\\ \CourseSemesterString}%
+    \fancyhead[R]{\namelineformat}
+    \fancyfoot[R]{\tiny Week \theSemesterWeek}%
+    \renewcommand{\headrulewidth}{0pt}%
+}
+
+\endinput

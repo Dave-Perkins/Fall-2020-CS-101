@@ -1,0 +1,183 @@
+\ProvidesPackage{exam}
+
+%\AtBeginDocument...for title, etc.?
+
+\newcommand{\usenameline}{\RequirePackage{basic}}
+\newcommand{\showkey}{}
+
+\DeclareOption{nameline}{\renewcommand{\usenameline}{,nameline}}
+\DeclareOption{key}{\renewcommand{\showkey}{,key}}
+
+\DeclareOption*{\PackageWarning{exam}{Unknown ‘\CurrentOption’}}
+
+\ProcessOptions\relax
+
+%-----------------------------------------------------------------------
+
+\RequirePackage[blank\usenameline\showkey]{basic}
+
+\lstset{ 
+    style = exam
+}
+
+% This is the page style for the first page--defined
+% by maketitle as plain
+
+\fancypagestyle{plain}{%
+    \fancyhf{}% clear all the header and footer fields
+    \fancyhead[L]{\CourseNumberString\\ \CourseSemesterString}%
+    \fancyhead[R]{\namelineformat}
+    \renewcommand{\headrulewidth}{0pt}%
+}
+% This is the page style for the rest of the pages
+
+\fancyhf{} % clear all the header and footer fields
+\fancyhead[L]{\CourseNumberString\\ \CourseSemesterString}%
+\fancyhead[R]{\emph{\DocumentTitleString\DocumentSubtitleString}}
+\fancyfoot[C]{\thepage}%
+\fancyfoot[L]{\tiny \studentid}%
+\renewcommand{\headrulewidth}{0.4pt}%
+\renewcommand{\footrulewidth}{0pt}%
+
+% Macros
+
+\newcommand{\dates}[2]{\par \textbf{Assigned: } #1 \\ \textbf{Due: } #2}
+
+% Various kinds of questions for exams
+
+
+\newcommand{\fillintheblank}[3][2in]%
+{{#2 \raisebox{.25in-4pt}{\parbox{#1}{\vspace{.5in}\hrulefill}} #3}}
+
+\newcommand{\answerline}[1][1in]%
+{{\fillintheblank[#1]{}{}}}
+
+\RequirePackage{pst-plot} % Needed for grade gray box
+
+\RequirePackage{forloop}
+
+\definecolor{gradebackground}{RGB}{225, 225, 225}
+
+% Exam instruction boxes
+
+\newcommand{\Instructions}[1]{{
+    \begin{framed}
+        \section{Instructions}
+        #1
+    \end{framed}
+}}
+
+% Construct a point grade scoring section
+
+\newcommand{\GradeLine}[2][.75in]{{\vspace{.2in}#2: \hfill\parbox[b]{#1}{\hrulefill}\par}}
+
+% Define the \GradeBox command...
+
+\newcounter{questionno}
+\newcommand{\GradeBox}[2]{{
+    \fcolorbox{black}{gradebackground}{
+        \parbox[b]{\widthof{\GradeLine{#1 00}}}{
+%\GradeLine{Time}
+            \forloop{questionno}{1}{\value{questionno} < \numexpr#2+1}{\GradeLine{#1 \arabic{questionno}}}
+            \GradeLine{Total}
+            \GradeLine{Grade}
+        }%
+    }%
+}}
+
+% Grading box and comic
+
+\newlength{\imagewidth}
+\newlength{\gradeboxwidth}
+\newlength{\gradeboxgutterwidth}
+\newlength{\cartoonwidth}
+\setlength{\gradeboxgutterwidth}{0.2in}
+\newsavebox{\gradebox}
+\newsavebox{\imagebox}
+\newcommand{\CartoonGradeLine}[5][1]{{
+% Make and save the grading box
+    \savebox{\gradebox}{\GradeBox{#4}{#5}}
+    \settowidth{\gradeboxwidth}{\usebox{\gradebox}}
+    \savebox{\imagebox}{\includegraphics[scale=#1,keepaspectratio]{#2}}
+    \settowidth{\imagewidth}{\usebox{\imagebox}}
+    \pgfmathsetlength{\cartoonwidth}{min(\imagewidth,\linewidth-\gradeboxwidth-\gradeboxgutterwidth}
+    \hfill
+    \begin{minipage}{\cartoonwidth}
+        \usebox{\imagebox}
+        \par
+        \vspace{.15in}
+        {\comic #3}
+    \end{minipage}
+    \hfill
+%    \begin{minipage}{\gradeboxwidth}
+%        \usebox{\gradebox}
+%    \end{minipage}
+}}
+
+% \question[no-vfills]{question text}
+
+\newcounter{loop}
+\newcommand{\question}[2][1]{\item {#2
+%\vfill%
+\forloop{loop}{0}{\value{loop}<#1}{\vfill}
+}}
+
+% Various types of questions
+
+% \truefalse[vfills]{text}
+
+\newcommand{\true}[2][2]{\question[#1]{(\tagged{key}{\fbox{True}}\untagged{key}{True} or False) #2}}
+\newcommand{\false}[2][2]{\question[#1]{(True or \tagged{key}{\fbox{False}}\untagged{key}{False}) #2}}
+\newcommand{\truefalse}[2][2]{\question[#1]{(True or False) #2}}
+
+\setcounter{page}{0}
+
+\newcommand{\answer}[1]{%
+}
+
+% A box for doing scratch work
+
+\newcommand{\scratchbox}[2]{
+    \begin{framed}
+        \begin{center}\it #2\end{center}
+        \vspace{#1}
+    \end{framed}
+}
+
+
+\newcounter{WeekDue}
+\newcounter{StartDate}
+\newcounter{SemesterWeek}
+\addtocounter{StartDate}{\thedatenumber}
+\newcommand{\duedate}[2]{%
+    \DocumentSubtitle {\SemesterDate{#1}{#2}} %
+    \setcounter{SemesterWeek}{#2}
+%    \addtocounter{StartDate}{7*#2}%
+%    \addtocounter{StartDate}{#1}%
+%    \addtocounter{WeekDue}{#2}%
+%    \setdatebynumber{\theStartDate} %
+%    \DocumentSubtitle {\datedayname, \datemonthname\ \thedateday, \thedateyear}
+}
+
+% Stuff to support both one and two sided pages for double sided printing.
+
+\newcommand{\onesidedpage}{\newpage\newpage}
+
+\newcommand\blankpage{%
+    \null
+    \thispagestyle{empty}%
+    \addtocounter{page}{-1}%
+    \newpage}
+
+% Used for controlling adding of blank pages for single/double sided documents
+
+\newif\ifDoubleSidePage
+%Set to false by default
+\DoubleSidePagefalse
+%\DoubleSidePagetrue
+\newcommand\nextpage{\ifDoubleSidePage \newpage \blankpage \else \newpage\fi}
+%\newcommand\nextpage{\blankpage}
+\newcommand\doubleSided{\DoubleSidePagetrue}
+\newcommand\singleSided{\DoubleSidePagefalse}
+
+\endinput

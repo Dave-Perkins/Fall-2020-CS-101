@@ -1,0 +1,255 @@
+\ProvidesPackage{semesterdates}
+
+\DeclareOption*{\PackageWarning{basic}{Unknown ‘\CurrentOption’}}
+\ProcessOptions\relax
+
+\RequirePackage{calc}
+\RequirePackage{datenumber}
+
+\newcounter{datenumberSave}		% Saved date. Temporary.
+\newcounter{ThanksgivingBreakStartNumber}% Week of Thanksgiving. Global.
+\newcounter{FallBreakStartNumber}	% First day of fall break. Global.
+\newcounter{SpringBreakStartNumber}	% Week of Spring Break. Global.
+\newcounter{semesterStartDateNumber}	% Start of the semester. Global.
+\newcounter{semesterStartSundayNumber}	% First day in the semester. Global.
+\newcounter{semesterStartDay}		% First day in the semester. Global.
+\newcounter{semesterStartMonth}		% First month in the semester. Global.
+\newcounter{semesterStartYear}		% Year of the semester. Global.
+\newcounter{week}			% The week being calculated. Temporary.
+\newcounter{sundayThisWeek}		% The day number of this week's Sunday
+
+% Actual week -- number of weeks since beginning of semester including
+% breaks (0-based)
+
+\newcommand{\ActualSemesterWeek}[3]{%
+  \ActualSemesterWeekHelper{#1}{#2}{#3}%
+  \theActualSemesterWeekResult%
+}
+
+\newcounter{ActualSemesterWeekResult}
+\newcommand{\ActualSemesterWeekHelper}[3]{%
+    \setcounter{datenumberSave}{\value{datenumber}}%
+    \setdate{#1}{#2}{#3}%
+    \setcounter{sundayThisWeek}{\ifnum\value{datedayname}<7 \value{datenumber}-\value{datedayname}\else\value{datenumber}\fi}%
+    \setcounter{ActualSemesterWeekResult}{(\value{sundayThisWeek}-\value{semesterStartSundayNumber})/7}%
+    \setdatebynumber{\value{datenumberSave}}% Restore the current date
+}
+
+\newcommand{\SemesterWeekByClass}[3]{%
+  \SemesterWeekByClassHelper{#1}{#2}{#3}%
+  \theSemesterWeekByClassResult%
+}
+
+\newcounter{SemesterWeekByClassResult}
+\newcounter{weekFraction}
+\newcounter{thisYear}
+\newcounter{thisMonth}
+\newcounter{thisDay}
+\newcounter{mondayThisWeek}
+\newcommand{\SemesterWeekByClassHelper}[3]{%
+  \setcounter{datenumberSave}{\value{datenumber}}%
+  \setdate{#1}{#2}{#3}%
+  \setcounter{mondayThisWeek}{\ifnum\value{datedayname}<7 \value{datenumber}-\value{datedayname}+1\else\value{datenumber}\fi}%
+  \setdatebynumber{\value{mondayThisWeek}}%
+  \setcounter{thisYear}{\value{dateyear}}%
+  \setcounter{thisMonth}{\value{datemonth}}%
+  \setcounter{thisDay}{\value{dateday}}%
+  \setdatebynumber{\value{datenumberSave}}% Restore the current date
+  \ClassNumberHelper{\value{thisYear}}{\value{thisMonth}}{\value{thisDay}}%
+%  \ClassNumberHelper{#1}{#2}{#3}%
+  %  \setcounter{SemesterWeekByClassResult}{100*(\value{ClassNumberResult}-1)/3+5}%
+  \setcounter{SemesterWeekByClassResult}{100*(\value{ClassNumberResult}-1)/3}%
+  \setcounter{weekFraction}{\value{SemesterWeekByClassResult}}%
+  \setcounter{SemesterWeekByClassResult}{\value{SemesterWeekByClassResult}/100}%
+  \setcounter{weekFraction}{\remainder{\value{weekFraction}/10}{10}}%
+%  \theSemesterWeekByClassResult% .\theweekFraction%
+}
+
+\newcommand{\SemesterWeek}[3]{%
+  \SemesterWeekHelper{#1}{#2}{#3}%
+  \theSemesterWeekResult%
+}
+\newcounter{SemesterWeekResult}
+\newcommand{\SemesterWeekHelper}[3]{%
+    \ActualSemesterWeekHelper{#1}{#2}{#3}%
+    \setcounter{datenumberSave}{\value{datenumber}}%
+    \setdate{#1}{#2}{#3}%
+    \setcounter{SemesterWeekResult}{\value{ActualSemesterWeekResult}}%
+    \setcounter{SemesterWeekResult}{%
+      \ifnum \value{semesterStartMonth} > 5%
+        % Fall semester rules
+        \ifnum \value{datenumber}<\value{ThanksgivingBreakStartNumber}%
+          \value{SemesterWeekResult}%
+        \else%
+          \value{SemesterWeekResult}-1%
+        \fi%
+      % Spring semester rules
+      \else%
+        \ifnum \value{datenumber} > \value{SpringBreakStartNumber} \value{SemesterWeekResult}-2\else\value{SemesterWeekResult}\fi%
+%        \value{SemesterWeekResult}
+      \fi}%
+    \setcounter{datenumberSave}{\thedatenumber}%
+    \setdate{#1}{#2}{#3}%
+    \setdatebynumber{\thedatenumberSave}% Restore the current date
+}
+
+\newcommand{\remainder}[2]{(#1)-((#1)/(#2))*(#2)}
+
+% ClassNumber - The number of the class in the semester (1 based)
+
+\newcommand{\ClassNumber}[3]{%
+  \ClassNumberHelper{#1}{#2}{#3}%
+  \theClassNumberResult%
+}
+
+\newcounter{ClassNumberResult}
+\newcounter{classDayOfWeek}
+\newcounter{classDateNumber}
+\newcounter{daydist}
+\newcommand{\ClassNumberHelper}[3]{%
+    \setcounter{datenumberSave}{\value{datenumber}}%
+    \setdate{#1}{#2}{#3}%
+    \ifnum \value{datedayname}=2%
+    Invalid Date%
+    \else\ifnum \value{datedayname}=4%
+    Invalid Date%
+    \else\ifnum \value{datedayname}>5%
+    Invalid Date%
+    \else%
+    % Save the class day of the week away for later
+    \setcounter{classDayOfWeek}{\value{datedayname}}%
+    \setcounter{classDateNumber}{\value{datenumber}}%
+    % Set the date to the first day of classes for future use
+    \setdatebynumber{\value{semesterStartDateNumber}}%
+    % Determine number of classes in the partial week at the end...
+    \setcounter{ClassNumberResult}{\ifnum \value{classDayOfWeek}<\value{datedayname} (\value{classDayOfWeek}-\value{datedayname}+6)/2+1 \else (\value{classDayOfWeek}-\value{datedayname})/2+1 \fi}%
+    % Compute the number of classes in the whole weeks since the beginning of classes
+    \setcounter{ClassNumberResult}{\value{ClassNumberResult}+((\value{classDateNumber}-\value{semesterStartDateNumber})/7*3)}%
+    \setcounter{ClassNumberResult}{%
+      \ifnum \value{semesterStartMonth} > 5%
+        % Fall rules
+        \ifnum \value{classDateNumber} > \value{FallBreakStartNumber}%
+          \ifnum \value{classDateNumber} > \value{ThanksgivingBreakStartNumber}%
+            \value{ClassNumberResult}-4%
+          \else%
+            \value{ClassNumberResult}-1%
+          \fi%
+        \else%
+          \value{ClassNumberResult}%
+        \fi%
+      \else%
+        % Spring rules
+        \ifnum \value{classDateNumber} > \value{SpringBreakStartNumber}%
+          \value{ClassNumberResult}-6%
+        \else%
+          \value{ClassNumberResult}%
+        \fi%
+      \fi%
+    }%
+    \setcounter{daydist}{\value{classDateNumber}-\value{semesterStartDateNumber}}%
+    \setcounter{ClassNumberResult}{\ifnum \value{daydist}<0 1 \else \value{ClassNumberResult}\fi}%
+    \setdatebynumber{\value{semesterStartDateNumber}}%
+    \fi\fi\fi%
+    \setdatebynumber{\value{datenumberSave}}% Restore the current date
+}
+
+% weekToDate - returns a date number of the Sunday of the week
+
+\newcommand{\weekToDate}[1]{%
+  \weekToDateHelper{#1}%
+  \theWeekToDateResult%
+}
+
+\newcounter{WeekToDateResult}
+\RequirePackage{ifthen}
+\newcounter{weekNumberDate}
+\newcommand{\weekToDateHelper}[1]{%
+  \setcounter{weekNumberDate}{0}%
+  \setcounter{datenumberSave}{\value{datenumber}}%
+  \setdatebynumber{\value{semesterStartDateNumber}}%
+  % Find the previous Monday (to set loop for initial iteration
+  \addtocounter{datenumber}{(1-\value{datedayname})}%
+  \setdatebynumber{\value{datenumber}}%
+  \setcounter{SemesterWeekResult}{0}%
+  \whiledo{\value{SemesterWeekResult} < #1}{%
+    \addtocounter{datenumber}{7}%
+    \setdatebynumber{\value{datenumber}}%
+    \SemesterWeekHelper{\value{dateyear}}{\value{datemonth}}{\value{dateday}}%
+  }%
+  % Find the previous Sunday
+  \addtocounter{datenumber}{-1}%
+  \setdatebynumber{\value{datenumber}}%
+  \setcounter{WeekToDateResult}{\value{datenumber}}%
+  \setdatebynumber{\value{datenumberSave}}% Restore the current date
+}
+
+\newcommand{\SemesterStartDate}[3]{
+    % #1 - year
+    % #2 - month
+    % #3 - day
+    \setcounter{datenumberSave}{\value{datenumber}}%
+    \setdate{#1}{#2}{#3} % Set the date to the specified date
+    \setcounter{semesterStartDay}{#3} %
+    \setcounter{semesterStartMonth}{#2} %
+    \setcounter{semesterStartYear}{#1} %
+    \setcounter{semesterStartDateNumber}{\value{datenumber}} % Store away the date number
+    \setcounter{semesterStartSundayNumber}{\ifnum \value{datedayname}<7 \value{datenumber}-\value{datedayname} \else \value{datenumber} \fi}
+%    \setdatebynumber{\value{datenumberSave}-1} % Restore the current date
+    \setdatebynumber{\value{datenumberSave}}% Restore the current date
+}
+
+\newcommand{\FallBreakStartDate}[3]{
+    \setcounter{datenumberSave}{\thedatenumber} % Save the current date so we can restore it
+    \setdate{#1}{#2}{#3}%
+    \setcounter{FallBreakStartNumber}{\value{datenumber}}
+    \setcounter{datenumber}{\thedatenumberSave} % Restore the current date
+}
+
+\newcommand{\ThanksgivingDate}[3]{
+    % The implementation of ActualSemesterWeek...
+    \setcounter{datenumberSave}{\value{datenumber}}%
+    \setdate{#1}{#2}{#3}%
+    % Adjust the reference date so it begins on Sunday (a non-class day)
+    \setcounter{datenumber}{\value{datenumber}-4}
+    \setdatebynumber{\value{datenumber}}% Restore the current date
+    \setcounter{ThanksgivingBreakStartNumber}{\value{datenumber}}
+%    \setcounter{sundayThisWeek}{\ifnum \value{datedayname}<7 \value{datenumber}-\value{datedayname} \else \value{datenumber} \fi}%
+%    \setcounter{ThanksgivingBreakStartNumber}{(\value{sundayThisWeek}-\value{semesterStartSundayNumber})/7}%
+    \setdatebynumber{\value{datenumberSave}}% Restore the current date
+}
+
+\newcommand{\SpringBreakStartDate}[3]{
+    \setcounter{datenumberSave}{\thedatenumber} % Save the current date so we can restore it
+    \setdate{#1}{#2}{#3}%
+    % Adjust the reference date so it begins on Sunday (a non-class day)
+    \setcounter{datenumber}{\value{datenumber}-1}
+    \setdatebynumber{\value{datenumber}}% Restore the current date
+    \setcounter{SpringBreakStartNumber}{\value{datenumber}}
+    \setcounter{datenumber}{\thedatenumberSave} % Restore the current date
+}
+
+%\newcommand{\semesterDateShort}[2]{Implement <semester-date-short>}
+\newcommand{\semesterDate}[2]{%
+  % #1 - Weekday (0-6)
+  % #2 - Week (0-based)
+  \weekToDateHelper{#2}%
+  % Get the date of of the desired day of the week
+  \addtocounter{WeekToDateResult}{#1}%
+  \setdatebynumber{\value{WeekToDateResult}}%
+  \datedayname, \datedate%
+  \setdatebynumber{\value{datenumberSave}}% Restore the current date
+}
+
+\newcounter{semesterDateNumber}
+\newcounter{semesterWeek}
+\newcounter{ThanksgivingBreakWeekNum}
+
+% Defaults if nothing is set
+
+\SemesterStartDate{2019}{1}{22}
+%\SemesterStartDate{2019}{8}{29} % The first day of classes
+\FallBreakStartDate{2019}{10}{17} % The first day of fall break
+\ThanksgivingDate{2019}{11}{28} % The date of Thanksgiving
+\SpringBreakStartDate{2019}{3}{18} % The first Monday of Spring Break
+
+\endinput
