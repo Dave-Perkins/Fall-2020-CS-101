@@ -1,0 +1,77 @@
+% ALGORITHMS 1
+\documentclass[11pt, letterpaper, onecolumn, oneside, final]{article}
+
+\usepackage{lab}
+\usepackage{soul}
+
+\newfontfamily{\consolas}{Consolas}
+[Extension = .ttf]
+%\usepackage{fontspec}
+
+\DocumentTitle {Lab 3A}
+\DocumentSubtitle {Functions and Algorithms!}
+% End of preamble
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\maketitle
+
+
+In this lab you will use the strong foundation you've built up so far in this class and apply it to different problems. This lab will focus less on cementing your understanding of new skills and more on applying the skills you already have. That being said, there will be some quick new skills learned in this lab that are needed for the next project.
+
+
+\begin{enumerate}
+    \item Before we have you practice your problem solving skills, CSV manipulation needs to be introduced to prepare you for the next project. Before you get started you need to make sure to download the CSV provided from the resources section on you class piazza page and put it in the same directory as your {\consolas lab3A.py} file. Also like every other package make sure to {\consolas import csv} at the top of your file. 
+    \begin{enumerate}
+        \item First load the csv into memory by opening the file like so:
+        \begin{center}
+ \colorbox{lightgray}{\parbox{.64\textwidth}{\consolas myCSV = open('CVS\_File\_Name\_Here.csv', newline='')}}.
+        \end{center}
+        \item Next make a CSV reader object out of opened file so that the CSV can easily be converted into a 2D list:
+        \begin{center}
+\colorbox{lightgray}{\parbox{.55\textwidth}{\consolas myReader = csv.reader(myCSV, delimiter=',')}}.
+        \end{center}
+        \item Lastly, you convert the CSV to a list by doing the following:
+        \begin{center}
+ \colorbox{lightgray}{\parbox{.3\textwidth}{\consolas
+            csvList = []\\
+            for row in myReader:\\ \hspace*{8mm}csvList.append(row)
+        }}.
+        \end{center}
+    \end{enumerate}
+    The csv reader object stores each row of the CSV as a list so by iterating through the reader object each row is added to csvlist. Now you have a 2D list called {\consolas csvList}. Each element in {\consolas csvList} is a list which represents each row of the CSV which each element of that internal list being the cells of that row.\\\\
+    Now iterate through csvlist and print out the contents by separating each cell by a comma and each row by a new line.(Hint: Remember each item of the outer list is a list representing a row and each item of the inner lists is a cell.)
+    
+    
+    %new csv problem or two
+    \item 
+
+
+    \item Write a function to compute the factorial of a given number. For those of you who don't know, a factorial of a number is the product  of that number and all numbers preceding it. For example, factorial 4, written $4! = 4 \cdot 3 \cdot 2 \cdot 1$, and $5! = 5 \cdot 4 \cdot 3 \cdot 2 \cdot 1$. Note that $0! = 1$.
+    \item Write a function that given a number, $n$, returns the $n^{th}$ number in the Fibonacci sequence. The Fibonacci sequence is a sequence of numbers, where $n_0 = 1$ ($0^{th}$ Fibonacci number) and $n_1 = 1$ ($1^{st}$ place), and each subsequent number is the sum of the two previous numbers. For example, the $2^{nd}$ Fibonacci number is $1 + 1 = 2$. The first 8 numbers of the Fibonacci sequence are:
+    $$
+    1, 1, 2, 3, 5, 8, 13, 21, \dots.
+    $$
+    \item Write a function that, given a list, returns the third largest number in a list. If there are less than 3 unique numbers in the list, return the largest number. 
+    \item Modify the last function to find the third smallest number. 
+    \item Write a function that given 2 strings, finds the number of times the second string occurs in the first string. For example given the string "abbaab", and the string "ab", you would return 2, since "ab" occurs twice in the string. 
+    \item Write a function that encrypts a string using a Caesar encryption. A Caesar encryption shifts each letter in the string by a certain number. So for example, if the shift amount is 3, {\consolas a} would become d, z would become {\consolas c}, {\consolas e} would become {\consolas h}, and so on. There is also the concept a left shift and a right shift. A right shift by three is described above, whereas a left shift would go backwards. For example, in a left shift with the amount 3, {\consolas d} would become {\consolas a}, {\consolas c} would become {\consolas z}, {\consolas a} would become {\consolas x}, and so on. A negative shift amount denotes a left shift, whereas a positive shift amount should denote a right shift. (Hint: You might want to use two lists of the alphabet: one uppercase and one lowercase.) \\
+    An example of a Caesar encryption with a shift value of 6 is as follows:
+    \begin{center}
+        {\consolas "Hamilton College Computer Science"}\\
+        {\consolas "Ngsorzut Iurrkmk Iusvazkx Yioktik"}.
+    \end{center}
+    
+    \item Write a function, that given a integer, returns the Roman numeral equivalent of that number. Below are two lists which give a mapping from an {\consolas int} to its Roman numeral equivalent. These lists give all of the base cases needed to convert any number to its corresponding Roman numeral. Here are the lists you will need: \\
+{\consolas 
+val = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]\\
+symb = ["M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I"]}.
+    
+    
+    
+    
+
+\end{enumerate}
+
+\end{document}

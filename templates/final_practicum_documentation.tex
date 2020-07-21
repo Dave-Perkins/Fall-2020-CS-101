@@ -1,0 +1,171 @@
+
+\documentclass[11pt, letterpaper, onecolumn, oneside, final]{article}
+
+\usepackage{lab}
+\usepackage{soul}
+
+\newfontfamily{\consolas}{Consolas}
+[Extension = .ttf]
+%\usepackage{fontspec}
+
+\DocumentTitle {Final practicum documentation}
+% End of preamble
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\maketitle
+% BRIEF INTRODUCTION TO TURTLES (cite?)
+% MAKE SURE TO SAVE THIS LAB IN A LABS FOLDER
+
+
+% THONNY SETUP & POINTERS?
+% LAB SETUP? DOWNLOAD FROM PIAZZA?
+\begin{enumerate}
+\item Audio
+    \begin{enumerate}
+        \item {\consolas Audio(duration=0, frame\_rate=44100)} \\
+        \hspace*{8mm}Creates a new Audio Object that is {\consolas duration} milliseconds of silence, and has a 
+        \hspace*{8mm}frame rate of {\consolas frame\_rate}.
+         
+        \item {\consolas audio.get\_audioseg()} \\ 
+        \hspace*{8mm}Returns the audio object's Pydub Audio Segment attribute
+        
+        \item {\consolas audio.set\_audioseg(newaudio)} \\
+        \hspace*{8mm}Sets the audio object's Pydub Audio Segment attribute to be {\consolas newaudio}
+        
+        \item {\consolas audio.get\_frame\_rate()} \\ 
+        \hspace*{8mm}Returns the Audio's frame rate
+        
+        \item {\consolas audio.get\_sample\_list()} \\
+        \hspace*{8mm}Returns the list of samples for the Audio object's audio.
+        
+        \item {\consolas audio.from\_sample\_list(sample\_lst, template=None)} \\
+        \hspace*{8mm}Sets the Audio object's audio to be the audio created by {\consolas sample\_lst}. {\consolas template} 
+        \hspace*{8mm}is used for metadata like frame rate, number of channels, etc. and is generally 
+        \hspace*{8mm}provided when writing a function that returns a new Audio object based on some 
+        \hspace*{8mm}modification of the original (The original's meta data is provided).
+        
+        \item {\consolas audio.open\_audio\_file(filename)} \\
+        \hspace*{8mm}Sets the audio object's audio to be the audio read from {\consolas filename}
+        
+        \item {\consolas audio.save\_to\_file(filename)} \\
+        \hspace*{8mm}Saves the audio object's audio to {\consolas filename} in .wav format.
+        
+        \item {\consolas audio.from\_generator(freq, duration, wavetype)} \\
+        \hspace*{8mm}Sets the audio object's audio to be a wave of type {\consolas wavetype} (ex. Sine, Square, Sawtooth), of frequency {\consolas freq}, and {\consolas duration} milliseconds long.
+        
+        \item \consolas{audio.play()} \\
+        \hspace*{8mm}Plays the audio object's audio
+        
+        \item {\consolas len(audio)} \\
+        \hspace*{8mm}Returns the audio's length in milliseconds
+        
+        \item {\consolas audio1 + audio2} \\
+        \hspace*{8mm}Uses the + operator to concatenate {\consolas audio1} and {\consolas audio2}'s audio together. Returns a new audio object.
+        
+        \item {\consolas audio1 += audio2} \\
+        \hspace*{8mm}Uses the += operator to concatenate {\consolas audio2}'s audio onto {\consolas audio1}'s.
+        \hspace*{8mm}Modifies audio1.
+        
+        \item {\consolas audio * loopnum} \\
+        \hspace*{8mm}Uses the * operator to loop {\consolas audio loopnum} times. Returns a new \hspace*{8mm}audio object.
+        
+        \item {\consolas audio *= loopnum} \\
+        \hspace*{8mm}Uses the *= operator to loop {\consolas audio loopnum} times. Modifies audio.
+        
+        \item {\consolas audio[]} \\
+        \hspace*{8mm}Uses [] to implement indexing and slicing of audio.
+        
+        \item {\consolas audio1.overlay(audio2, position=0, loop=False)} \\
+        \hspace*{8mm}Overlays (combines) {\consolas audio1} and {\consolas audio2}. {\consolas position} is the millisecond 
+        \hspace*{8mm}at which {\consolas audio2} is placed in {\consolas audio1}. If {\consolas loop} is set to True, then 
+        \hspace*{8mm}{\consolas audio2} will be looped until the end of {\consolas audio1}
+        
+        \item {\consolas audio.apply\_gain(gain)} \\
+        \hspace*{8mm}Changes the amplitude (or general loudness) of the audio. 
+        \hspace*{8mm}Specified in decibels. To make something quieter, use a negative integer. 
+        
+        \item {\consolas audio.fade(fadeintime, fadeouttime)} \\
+        \hspace*{8mm}Adds a fade to the beginning of the audio of length {\consolas fadeintime} \hspace*{8mm}milliseconds, and a fade to the end of the audio of length
+        \hspace*{8mm}{\consolas fadeouttime} milliseconds.
+        
+        \item {\consolas audio.change\_speed(factor)} \\
+        \hspace*{8mm}Changes the speed of the audio by a factor of {\consolas factor}. For example 
+        \hspace*{8mm}to make the audio play at double the speed, {\consolas factor} would equal 2. 
+        \hspace*{8mm}Similarly, the half the speed, {\consolas factor} would equal .5.
+        
+        \item {\consolas audio = generate\_music\_note(note, duration, wavetype, gain=0)} \\
+        \hspace*{8mm}Generates a musical note of length {\consolas duration} milliseconds, with 
+        \hspace*{8mm}a {\consolas wavetype} wave generator, and with an optional gain applied. \hspace*{8mm}{\consolas note} is specified in a string of the form: \\\\
+        \hspace*{8mm}(Letter)(\#, b or (empty string))(Octave number). \\\\
+        Examples, 'C\#4', 'C3', 'ab2'
+        
+\end{enumerate}
+
+
+
+\item Pillow(image manipulation)
+\begin{enumerate}
+    \item {\consolas Image.open(file)}\\
+    \hspace*{8mm}{\consolas file}is a string which is either a image in the same directory as your .py file or a \\
+    \hspace*{8mm}path to a given image. When giving a path make sure to escape all slashes and\\
+    \hspace*{8mm}make sure to include the file extension in the filename.
+    
+    \item {\consolas Image.new(mode, size) }\\
+    \hspace*{8mm}{\consolas mode}is a string which should always be {\cosolas "RGB"} for this class. {\consolas size} should be a\\
+    \hspace*{8mm}tuple with the dimensions of the image you are creating in the form (x,y).
+    
+    \item {\consolas Image.save(file)}\\
+    \hspace*{8mm} Saves image in the directory of the .py file you are working in. {\consola file} is a string of\\
+    \hspace*{8mm}the name you want the saved image to have. This string must include the desired\\
+    \hspace*{8mm}file extension.
+    
+    \item {\consolas Image.getpixel(xy)}\\
+    \hspace*{8mm}{\consolas xy} is tuple (x,y) that represents the coordinate position of the pixel you want to\\
+    \hspace*{8mm}get the RGB value of. This function returns a three tuple (R,G,B) where each\\
+    \hspace*{8mm}element is a number from 0-255 which represents the intensity of that color.
+    
+    \item {\consolas Image.putpixel(xy, value)}\\
+    \hspace*{8mm}{\consolas xy} is tuple (x,y) that represents the coordinate position of the pixel you want\\
+    \hspace*{8mm}to change.{\consolas Value} is a three tuple (R,G,B) where each element is a number from\\
+    \hspace*{8mm}0-255 which represents the intensity of the coresponding color.
+    
+    \item{\consolas Image.size}\\
+    \hspace*{8mm}Returns a tuple (width, height) of the size of the image in pixels. 
+    
+    \item{\consolas Image.height}\\
+    \hspace*{8mm}Returns the height of the image in pixels.
+    
+    \item{\consolas Image.width}\\
+    \hspace*{8mm}Returns the width of the image in pixels.
+    
+\end{enumerate}
+
+\item NLTK(text analysis)
+\begin{enumerate}
+    \item {\consolas word\_tokenize(text)}\\
+    \hspace*{8mm} Takes the string {\consolas text} and returns a list of strings where each word in {\consolas text} is an element.
+    
+    \item {\consolas pos_tag(tokens)}\\
+    \hspace*{8mm}Takes a list of strings and returns a list of tuples where the first element of the tuple is the string from the original list and the second element is the part of speech tag.
+    
+\end{enumerate}
+
+
+\item CSV/file manipulation
+\begin{enumerate}
+    \item {\consolas open(filename, newline=)}\\
+    \hspace*{8mm}{\consolas filename} is a string of the filname including the file extension. {\consolas newline} is a\\
+    \hspace*{8mm}keyword argument which must be {\consolas''} when dealing with CSVs. This returns a file\\
+    \hspace*{8mm}object associated with the file passed. 
+    
+    \item {\consolas csv.reader(csv, delimiter=)}\\
+    \hspace*{8mm}{\consolas csv} is a file object of a csv file. {\consolas delimiter=} is a keyword argument that takes a\\
+    \hspace*{8mm}string of the csv's delimiter which is almost always {\consolas ','}. This returns a csv reader\\
+    \hspace*{8mm}object that can easily be iterated trough using for loops with  {\consolas row} and  {\consolas column} as\\
+    \hspace*{8mm}the iterator variables.  
+\end{enumerate}
+
+\end{enumerate}
+\end{document}

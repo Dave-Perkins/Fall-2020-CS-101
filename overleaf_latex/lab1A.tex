@@ -1,0 +1,171 @@
+% AUDIO 1
+\documentclass[11pt, letterpaper, onecolumn, oneside, final]{article}
+
+\usepackage{lab}
+\usepackage{soul}
+
+\newfontfamily{\consolas}{Consolas}
+[Extension = .ttf]
+%\usepackage{fontspec}
+
+\DocumentTitle {Lab 1A}
+\DocumentSubtitle {Lists \& Audio!}
+% End of preamble
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\maketitle
+
+% MAKE SURE TO SAVE THIS LAB IN A LABS FOLDER
+% LISTS/FOR LOOP QUESTIONS -------------------------------------------
+\section{Installation:}
+    First install both {\consolas simpleaudio} and {\consolas pydub} from Thonny's package manager, following these steps:
+\begin{enumerate}
+    \item Open Thonny. Click {\consolas Tools > Manage Packages...}
+    \item In the search bar, type {\consolas pydub}. Click {\consolas Install} and wait for it to be installed. You will be able to tell when it is done.
+    \item In the search bar, type {\consolas simpleaudio}. Click {\consolas Install} and wait for it to be installed. You will be able to tell when it is done.
+\end{enumerate}
+This is the general process to install most packages in Thonny.
+
+
+\begin{enumerate}
+
+    \item To start this lab, download the cs101audio.py file from Piazza, as well as the folder contain some audio samples. Place the cs101audio.py and the samples (\textbf{not} the folder containing the samples) into a Lab 2 folder. Do the same for the samples you collected independently. (If your audio files are not {\consolas .wav} files, you can visit \textcolor{blue}{\underline{https://audio.online-convert.com/convert-to-wav}} to convert other audio file types to {\consolas .wav} files. You can also use this site to convert from {\consolas .wav} into more common file types like {\consolas .mp3}.) Then create {\consolas lab2.py} file in that same folder. \textbf{If your files are not in the same folder, you will have issues with your code. This applies to the project as well}. 
+
+\item In you shell window, enter {\consolas name = "David Wippman'}.
+For each of the following, try to predict the output before using the shell window to verify it. Let us
+know if you have questions as you go!
+\begin{enumerate}
+\item {\consolas len(name)}\\
+\item {\consolas name[0] + name[12]}\\
+\item {\consolas name[15]}\\
+\item {\consolas name[:15]}\\
+\item {\consolas name[len(name) - 1]}\\
+\item {\consolas name[len(name) / 2]}\\
+\item {\consolas name[len(name) // 2]}\\
+\item {\consolas name[len(name) \% 2]}\\
+\item {\consolas name.find('i')}\\
+\item {\consolas name.find('ipp')}\\
+\item {\consolas name.find('x')}\\
+\item {\consolas name[0:5]}\\
+\item {\consolas name[:5]}\\
+\item {\consolas name[5:len(name)]}\\
+\item {\consolas name[5:]}\\
+\item {\consolas name[:]}\\
+\item {\consolas name[0:len(name)]}\\
+\item {\consolas name[::-1]}\\
+\item {\consolas name[0:len(name) - 1:3]}\\
+\item {\consolas name[name.find('v'):]}\\
+\item {\consolas name[:-4:4]}\\
+\item  {\consolas name[len(name) - 1:0:-2]}\\
+\end{enumerate}
+Given a slice {\consolas name[n1:n2:n3]}, what do you think each of {\consolas n1}, {\consolas n2}, {\consolas n3} represent?\\
+\\
+\item Now, to get more practice, you will do the reverse of the previous exercise. Given the string {\consolas spirit = "Hamilton College Continentals"}, write down the slicing or indexing phrase that would output the strings given below. Verify your answers using the shell window. Try to obtain the most elegant solution possible. (Hint: Remember you can concatenate multiple slices.)
+\begin{enumerate}
+    \item "Ham"\\
+    \item "Hamilton"\\
+    \item "ton"\\
+    \item "in"\\
+    \item "Continent"\\
+    \item "slatnenitnoC "\\
+    \item "anent" \\ 
+    \item "Hot"\\
+    \item "no"\\
+    \item "not"\\
+    \item "Cool"\\
+\end{enumerate}
+
+\item Predict what the following piece of code will output. Enter this code into your {\consolas main} function in your editor window and run it to confirm your answer. 
+\\
+\\
+\colorbox{lightgray}{\parbox{.99\textwidth}{\consolas answer = "1234"\\
+print(answer[2:][1])\\
+for number in [1, 21, 321, 4]:\\
+\hspace*{6mm}answer = str(number) + answer\\
+\hspace*{6mm}print(answer)\\
+print("!")}}\\
+\\
+\\
+\\
+\newpage
+\item  In the field of cryptography, a single-letter substitution cipher is an encryption technique by which
+each letter of a plaintext message is replaced by corresponding ciphertext. We can create such a correspondence using any rearrangement of the possible plaintext letters. For example, given only spaces
+and capital letters of plaintext, the following indicates that space (` ') is to be replaced by `L', `A'
+is to be replaced by `N', and so on. Add code to the block below (where it says {\consolas \# INSERT YOUR CODE HERE}) to encrypt the {\consolas message} that the user has input.\\\\
+ \colorbox{lightgray}{\parbox{.99\textwidth}{\consolas
+ PLAINTX = ' ABCDEFGHIJKLMNOPQRSTUVWXYZ'\\
+ CYPHERT = 'LNUTD XFIVMGAKPJSZRYWBECQOH'\\\\\\
+ def main():\\
+ \hspace*{9mm}message = input("Enter a message with only uppercase and space: ")
+ \hspace*{9mm}encrypted = ''\\\\
+ \hspace*{9mm}\# INSERT YOUR CODE HERE\\\\
+ \hspace*{9mm}print("Your encrypted message follows:")\\
+ \hspace*{9mm}print(encrypted)\\\\
+ main()
+ }}\\\\
+Sample run:\\
+{\consolas Enter a message with only uppercase and space: INTRO CS IS FUN\\
+Your encrypted message follows: VPWRJLTYLVYLXBP\\}\\\\\\
+
+\item Now that you are more familiar with string and list slicing, you can use very similar techniques to manipulate audio using the {\consolas cs101audio} and {\consolas pydub} modules. To begin making Audio, use the following code to make blank Audio data:
+\begin{center}
+    \colorbox{lightgray}{\parbox{.23\textwidth}{\consolas my\_audio = Audio()}}.
+\end{center}
+You can also create silence portions of audio by indicating the length of the silence in milliseconds (1000 milliseconds = 1 second) using the following code:
+\begin{center}
+  \colorbox{lightgray}{\parbox{.275\textwidth}{\consolas my\_audio = Audio(1000)}}.
+\end{center}
+To open an audio file, use:
+\begin{center}
+\colorbox{lightgray}{\parbox{.45\textwidth}{\consolas my\_audio.open\_from\_file("filename")}}.
+\end{center}
+Then to play that audio, use:
+\begin{center}
+\colorbox{lightgray}{\parbox{.19\textwidth}{\consolas my\_audio.play()}}.
+\end{center}
+    
+\newpage
+\item With your audio, try each of the following things in your editor window and play your audio after each. What do each of these do? Write down a few notes on their purpose. (Feel free to change the parameters if it will help you get a better sense of what each thing does.)
+    \begin{enumerate}
+        \item {\consolas my\_audio *= 2} \\
+        \item {\consolas my\_audio = my\_audio + my\_second\_audio} (You will need a second audio file for this!) \\
+        \item {\consolas print(len(my\_audio))} \\ 
+        \item {\consolas my\_audio.changespeed(2)} \\
+        \item {\consolas my\_audio.changespeed(.5)} \\
+        \item {\consolas my\_audio.fade(500, 500)} \\
+        \item {\consolas my\_audio = my\_audio[:1000]} \\
+        \item {\consolas my\_audio = my\_audio[1000:]} \\
+        \item {\consolas my\_audio = my\_audio[:len(my\_audio) // 2]} \\
+        \item {\consolas my\_audio.apply\_gain(-2)} \\
+        \item {\consolas my\_audio.apply\_gain(2)} \\
+        \item {\consolas my\_audio.overlay(my\_second\_audio)}
+    \end{enumerate}
+
+\item You can also generate sound using {\consolas my\_audio.from\_generator()} method or {\consolas generate\_music\_note()} functions, like so: 
+    \begin{itemize}
+        \item {\consolas middle\_c = generate\_music\_note("c4", 1000, "Sine")}
+        \item {\consolas middle\_c = my\_audio.from\_generator(262, 1000, "Sine")}.
+    \end{itemize}
+    The {\consolas from\_generator} function allows you to specify a certain wave frequency, while {\consolas generate\_music\_note} allows you to generate waves with the frequency of specific music notes without having to look those frequencies up. 
+
+\item Using the above tools (and maybe some others), try generating audio for a simple song! For example, you could do Hot Cross Buns! The sequence of notes is BAG(rest)BAG(rest)GGGGAAAABAG(rest). (Note that the GGGG and AAAA should be quarter notes, while BAG are half notes. That means each G and A in GGGG and AAAA should be half the duration of those in BAG.) Once you've done this, see if there is any way to do it in fewer lines.
+
+\item To save your audio to a file so you can listen later, do {\consolas my\_audio.save\_to\_file("filename")}. Make sure your filename contains the {\consolas .wav} file extension. Try saving the song you just made to a file!
+
+\item The way sound is stored in computers is by taking many different measurements of the amplitude of a sound wave, called samples, and storing them together. These samples are taken at a certain sampling rate, or frame rate. A common frame rate is 44,100 samples/second. We can do some interesting things with audio by directly modifying these samples. You can use the
+\begin{center}\colorbox{lightgray}{\parbox{.33\textwidth}{\consolas my\_audio.get\_sample\_list()}}
+\end{center}
+method to access this list, and the 
+\begin{center}
+\colorbox{lightgray}{\parbox{.345\textwidth}{\consolas my\_audio.from\_sample\_list()}}
+\end{center}
+method to turn a sample list into audio. \\
+\\
+One thing to do with the sample list is to \emph{normalize} audio: make it as loud as possible. To do this, we need to stretch each sample as much as possible. Note that the samples must be between -32768 and 32767 (don't worry about why). Write a function that normalizes some audio. This will require some basic arithmetic. (Hint: Think of normalizing audio like stretching the wave out so that the maximum amplitude. You can find the max of a list using {\consolas max(lst)}) of the wave will end up at 32767. How would you alter the rest of the samples so they would stretch along with the max?)
+
+
+\end{enumerate}
+
+\end{document}

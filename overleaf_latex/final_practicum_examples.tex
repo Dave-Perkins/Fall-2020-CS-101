@@ -1,0 +1,39 @@
+
+\documentclass[11pt, letterpaper, onecolumn, oneside, final]{article}
+
+\usepackage{lab}
+\usepackage{soul}
+
+\newfontfamily{\consolas}{Consolas}
+[Extension = .ttf]
+%\usepackage{fontspec}
+
+\DocumentTitle {Final practicum questions}
+% End of preamble
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\maketitle
+% BRIEF INTRODUCTION TO TURTLES (cite?)
+% MAKE SURE TO SAVE THIS LAB IN A LABS FOLDER
+
+
+% THONNY SETUP & POINTERS?
+% LAB SETUP? DOWNLOAD FROM PIAZZA?
+\begin{enumerate}
+    \item Write a function using the {\consolas pillow} module that would scale down an image by copying every nth pixel from a given image to an image \(\frac{1}{n^2}\) of the original image size that would then be returned. Here is the function header to get you started. Since it is not possible for this to be accomplished perfectly for images with dimensions that don't divide evenly always round down to the nearest integer.
+    \begin{center}
+    \colorbox{lightgray}{\parbox{.41\textwidth}{\consolas def scaleImage(image, scaleNum):}}
+    \end{center}
+    Here {\consolas image} is a {\consolas pillow} image object and {\consolas scaleNum} represents n in the explanation above.  
+    
+    \item Write a function that given the name of textfile, return a 2D list where of each list is a list of words and the part of speech they all belong to. 
+
+    \item Write a function that given a cs101audio Audio Object, return a 3-tuple containing the largest sample, the smallest sample, and the sample closest to zero, in that order. 
+    
+    \item Write a function that given a string of letters (uppercase and lowercase), return the longest sub-string that contains only consonants.
+
+
+\end{enumerate}
+\end{document}

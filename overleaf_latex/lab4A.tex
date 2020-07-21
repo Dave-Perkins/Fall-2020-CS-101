@@ -1,0 +1,112 @@
+% IMAGES 1
+% IMAGES?
+\documentclass[11pt, letterpaper, onecolumn, oneside, final]{article}
+
+\usepackage{lab}
+\usepackage{soul}
+
+\newfontfamily{\consolas}{Consolas}
+[Extension = .ttf]
+%\usepackage{fontspec}
+
+\DocumentTitle {Lab 3A}
+\DocumentSubtitle {Images!}
+% End of preamble
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\maketitle
+
+% MAKE SURE TO SAVE THIS LAB IN A LABS FOLDER
+% LISTS/FOR LOOP QUESTIONS -------------------------------------------
+\section{Installation:}
+    First install {\consolas Pillow} from Thonny's package manager, following these steps:
+\begin{enumerate}
+    \item Open Thonny. Click {\consolas Tools > Manage Packages...}
+    \item In the search bar, type {\consolas Pillow}. Click {\consolas Install} and wait for it to be installed. You will be able to tell when it is done.
+\end{enumerate}
+This is the general process to install most packages in Thonny. 
+
+\section{What to do.}
+\begin{enumerate}
+
+    \item To do this lab, you will need to have a few images to open and manipulate using the  {\consolas pillow} module. The easiest way to do this is to put the images you want to use in the same folder as the {\consolas lab6.py} file you will be writing this lab in.
+
+    \item Before you get into the fun of {\consolas pillow}, a few things need to be set up that let you easily load all the different images you want to work with. 
+    \begin{itemize}
+        \item First, add these lines code to the top of your file:
+    \begin{center}
+    \colorbox{lightgray}{\parbox{.27\textwidth}{\consolas\\
+    import os\\
+    from PIL import Image}}.
+    \end{center}
+    Importing {\consolas os} allows you to easily get the path to the directory your python file and, therefore, your images are which with a few lines of code lets you avoid writing the entire path to file every time. The second line just imports a part of {\consolas pillow} that you will be using. There are many other modules in {\consolas pillow} which you can look into on your own time and possibly even use to make something interesting for you images project.
+    
+    
+    \item Second, add this one line:
+    \begin{center}
+        \colorbox{lightgray}{\parbox{.29\textwidth}{\consolas directory = os.getcwd()}}.
+    \end{center}
+    This line saves the string of the path to the folder where your images (and python file) are to the variable {\consolas directory}. This will streamline the loading of images with {\consolas pillow}, making your life easier.
+    \end{itemize}
+\end{enumerate}
+
+\section{Exercises.}
+\begin{enumerate}
+    \item First, you will simply load and display an image to make sure that you have set up anything right. To do this write this code in your file:
+     \begin{center}
+        \colorbox{lightgray}{\parbox{.73\textwidth}{\consolas myImage = Image.open(directory + "/your\_image\_name\_here")\\
+        myImage.show()}}.
+    \end{center}
+    Replace \textquotedblleft your\_image\_name\_here" with the name of the image you want to load--don't forget to include the file extension. The phrase {\consolas directory + "/your\_image\_name\_here"} is how you will access each picture you would like to use.
+    
+    \item For your first task you will be writing a function that takes an image object and applies a simple color filter to your image. To achieve this, you need to know of 4 things about image objects.
+    \begin{enumerate}
+        \item {\consolas Image.width}: this returns the width of the image. Note that this is not a method of Image, but just data that can be accessed so you \textbf{DO NOT} need to add parentheses after it.
+        \item {\consolas Image.height}: this returns the height of the image. Note that this is not a method of Image, but just data that can be accessed so you \textbf{DO NOT} need to add parentheses after it.
+        \item {\consolas Image.getpixel((x,y))}: This method takes a tuple of the x and y coordinates of a pixel and returns a three tuple of the RGB value of the pixel in the order (R,G,B)
+        \item {\consolas Image.putpixel((x,y),(R,G,B))}: This method takes a tuple of the x and y coordinates of a pixel and a three tuple of the RGB values of a pixel and puts a pixel with the given RGB value at the given coordinate on the image.
+    \end{enumerate}
+    Knowing these 4 things you should be to tint the image a given color. Try thinking about the image as a 2D list where every item must be modified. If you would like a refresher on RGB values, refer back to Lab 2B. (Hint: to tint a pixel the one or more of the R, G, or B values must be increased by a certain amount.)
+    
+    \item A function that might prove useful later in this lab but more likely in your project is a distance function that calculates the distance between two RGB three tuples. This is helpful if you ever need to determine how \textquotedblleft far" away two RGB values are from each other. The equation for the distance between two 3D points(which RGB values are) is:
+    $$
+        \sqrt{(R_1 - R_2)^2+(G_1 - G_2)^2+(B_1 - B_2)^2}
+    $$
+    Now write this function.
+    
+    
+    
+    \item Write a function that takes an image object, a width, and an RGB three tuple and adds a border to an image with the given width and color. This border should go on top of the image given and not extend the image. This will result in the edges of the image being hidden.
+    
+    % come back to getting an image with PURE black text (only works if it is black black)
+    \item You will now be writing a simple function to encode a message (text) into an image, following the process below. For this process to work without significant overhead, both the image the message is being hidden in and the image that contains the message must be of the same size, neither image can contain an alpha channel, and the message to hide must be made up of (255, 255, 255) pure black pixels.%possibly give the methods to make images that work with this easily
+    \begin{enumerate}
+        \item The first thing that must be done is to slightly modify the image in a way that is not noticeable to the eye and allows the image to have a hide code stored inside of it. A simple way of doing this is by making every single pixel in the image have an even red value. This is accomplished with the code below.
+        
+        \begin{center}
+        \colorbox{lightgray}{\parbox{.75\textwidth}{\consolas 
+        for x in range(image.width):\\
+        \hspace*{8mm}for y in range(image.height):\\
+        \hspace*{16mm}rgb = image.getpixel((x,y))\\
+        \hspace*{16mm}if (rgb[0]\%2) == 1:\\
+        \hspace*{24mm}image.putpixel((x,y),(rgb[0]-1,rgb[1],rgb[2]))  }} 
+        \end{center}
+         
+         By doing this there is now a way to encode a black and white message into our color image. This is done by changing the red values from even to odd if that pixel corresponds to a black pixel in the black and white message image. This is done with the code below.
+        
+        \begin{center} \colorbox{lightgray}{\parbox{.99\textwidth}{\consolas 
+        for x in range(image.width):\\
+        \hspace*{8mm}for y in range(image.height):\\
+        \hspace*{16mm}rgbImage = image.getpixel((x, y))\\
+        \hspace*{16mm}rgbMessage = msg.getpixel((x, y))\\
+        \hspace*{16mm}if rgbMessage == (0, 0, 0):\\
+        \hspace*{24mm}image.putpixel((x, y),(rgbImage[0] + 1, rgbImage[1], rgbImage[2])))  }} 
+        \end{center}
+        These two chunks of code can be combined in a function that takes the parameter {\consolas image}, which is the image which will get a message encoded into it, and a parameter {\consolas msg}, which is the black and white image that contains the encoded message.
+    \end{enumerate}
+    \item Now that you have encoded the message, email your image (with the hidden message) to another set of partners and have them email you theirs. You and your partner will now work on decoding the message. We are not giving you the decoding process as we did above. Your goal is to reverse engineer the code you have just written to do the opposite task. This will be tricky--if you need help, ask a professor or a TA. If you are struggling, try planning it out by hand first. 
+\end{enumerate}
+
+\end{document}

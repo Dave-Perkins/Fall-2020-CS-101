@@ -1,0 +1,138 @@
+% TURTLE 1
+\documentclass[11pt, letterpaper, onecolumn, oneside, final]{article}
+
+\usepackage{lab}
+\usepackage{soul}
+
+\newfontfamily{\consolas}{Consolas}
+[Extension = .ttf]
+%\usepackage{fontspec}
+
+\DocumentTitle {Lab 0A}
+\DocumentSubtitle {Turtles!}
+% End of preamble
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\maketitle
+% BRIEF INTRODUCTION TO TURTLES (cite?)
+% MAKE SURE TO SAVE THIS LAB IN A LABS FOLDER
+A \textbf{turtle} acts as a virtual pen in Python that allows users to create drawings, shapes, and graphics using code. In this lab you will learn the basics of turtles and how they are used to draw lines, designs, patterns, and even make some of your own! 
+
+To start this lab, download {\consolas lab0A.py} from the class Piazza pge under Resources, and place the downloaded file in your {\consolas cs101} folder. Open the file in Thonny, and begin the lab!
+
+% THONNY SETUP & POINTERS?
+% LAB SETUP? DOWNLOAD FROM PIAZZA?
+\begin{enumerate}
+\item As a reminder, {\consolas \#} denotes a comment, or a line to be ignored. In the examples below, predict what effect each will have and then test your prediction by uncommenting only the given lines. 
+\begin{enumerate}
+    \item What will the code on line 33 cause the turtle to do? What will happen when you change the number inside the parentheses from 150 to 50? to 300? to -100? What does this number represent?\\
+    \\
+    \item What will the code on line 35 cause the turtle to do? How is this different from part (a)?\\
+    \\
+    \item What will the code on lines 37 and 38 do? How is this different from part (a)? What will happen when you change the number in parentheses from 90 to 30? to 215? to -50? What does this number represent?\\
+    \\
+    \item What will lines 40 and 41 do? How is this different from part (c)?\\
+    \\
+    \item What will line 43 do? What happens when you change the number in parentheses from 75 to 200? What does this number represent?\\
+    \\
+    \item What will line 45 do? How is this different from part (e)? What happens when you change the second number from 180 to 90? What do you think this number represents?\\
+    \\
+    \item Uncomment \textbf{only} line 48 and observe what happens. Now uncomment \textbf{both} lines 47 and 48. What changed? What do you think line 47 does?\\
+    \\
+\end{enumerate}
+\textbf{Show a professor or TA your progress and get a sticker!}
+% Different file? maze.py? different function, commented out in main?
+\item We have set up a maze for your turtle. Work the turtle through the maze without breaking any typical rules of a maze. This will take some trial and error, but it is possible. Note that the instructions you type in your code are executed in order, meaning that you turtle does what you tell it to, in the order you tell it to. This is the way that code typically executes and you will see this throughout the rest of the course.
+
+%switch functions again?
+\item Now that you know how to draw a line and turn the turtle, draw a square.
+
+\item Uncomment the code on line 62. This is called a \textbf{loop}. This will run your code the number of times that is in the parentheses of {\consolas range}. Draw a square using the loop we have provided. (Hint: it should use pieces of your code above!)\\
+\textbf{Show a professor or TA your progress and get a sticker!}
+
+\item Copy your loop from above. You will now alter it to draw an equilateral triangle. How many times would you need to repeat your code? How would you change your previous loop to do this? (Hint: each angle in an equilateral triangle is 60 degrees. How much do you need to turn the turtle to form a 60$^{\circ}$ angle? It might not be 60$^{\circ}$.)
+
+\item Copy your loop from above. You will now alter it to draw another type of polygon of your choice. How many times would you need to repeat your code to make a pentagon? A hexagon? An octagon? How would you change your previous loop to do this? (Hint: what do you know about the angles from your last loop?)\\\\\\\\
+\textbf{Show a professor or TA your progress and get a sticker!}
+
+\item We have given you Loops A, B, and C. Uncomment one at a time and see the intricate patterns they create. Try changing the numbers used. How do they each change the final image? What does each loop do to \emph{count}? Explore these loops, and maybe even try to write your own! (Hint: these could give you some cool ideas for your first project!)\\\\\\\\
+\textbf{Show a professor or TA your favorite design and get a sticker!}
+\end{enumerate}
+
+\newpage
+\begin{center}
+\section{Commonly Used Turtle Functions}
+\end{center}
+
+\begin{enumerate}
+\item\colorbox{lightgray}{\consolas turtle.forward(distance)/turtle.fd(distance)}
+\begin{enumerate}
+\item Move the turtle forward by the specified \emph{distance}, in the direction the turtle is headed.
+\end{enumerate}
+\item\colorbox{lightgray}{\consolas turtle.backwards(distance)/turtle.bk(distance)}
+\begin{enumerate}
+\item Move the turtle backward by \emph{distance}, opposite to the direction the turtle is headed. Does \textbf{not} change the direction the turtle is facing.
+\end{enumerate}
+\item\colorbox{lightgray}{\consolas turtle.left(angle)/turtle.lt(angle)}
+\begin{enumerate}
+\item Turn turtle left by \emph{angle} degrees.
+\end{enumerate}
+\item\colorbox{lightgray}{\consolas turtle.right(angle)/turtle.rt(angle)}
+\begin{enumerate}
+\item Turn turtle right by \emph{angle} degrees.
+\end{enumerate}
+\item\colorbox{lightgray}{\consolas turtle.circle(radius, angle)}
+\begin{enumerate}
+\item Draws a circle with the provided \emph{radius}, starting at the turtle's current location. \emph{Angle} is optional, but can be used to specify how much of a circle is drawn. For example, an \emph{angle} of 90 would draw $\frac{1}{4}$ of a circle, 180 would draw $\frac{1}{2}$ a circle, and 360 would draw a full circle. If you don't provide an \emph{angle}, it draws a full circle.
+\end{enumerate}
+\item\colorbox{lightgray}{\consolas turtle.dot(size, color)}
+\begin{enumerate}
+\item Draw a circular dot with diameter \emph{size}, using \emph{color}. If \emph{color} is not given, the current pen color is used.
+\end{enumerate}
+\item\colorbox{lightgray}{\consolas turtle.penup()/turtle.up()}
+\begin{enumerate}
+\item Pull the pen up – does \textbf{not} draw while moving.
+\end{enumerate}
+\item\colorbox{lightgray}{\consolas turtle.pendown()/turtle.down()}
+\begin{enumerate}
+\item Pull the pen down – draws while moving.
+\end{enumerate}
+\item\colorbox{lightgray}{\consolas turtle.pencolor(color)}
+\begin{enumerate}
+\item Set pencolor to \emph{color}.
+\end{enumerate}
+\item\colorbox{lightgray}{\consolas turtle.pensize(width)/turtle.penwidth(width)}
+\begin{enumerate}
+\item Set the line thickness to \emph{width}.
+\end{enumerate}
+\item\colorbox{lightgray}{\consolas turtle.speed(speed)}
+\begin{enumerate}
+\item Set the turtle’s speed to \emph{speed}, an integer between 0 and 10 (10 being the fastest, 1 being the slowest, and 0 being no animation).
+\end{enumerate}\\
+\newpage
+\item\colorbox{lightgray}{\consolas turtle.goto(x,y)}
+\begin{enumerate}
+\item Move turtle to a \emph{x}, \emph{y} coordinate position on the screen. If the pen is down, draws a line. Does not change the direction the turtle is facing.
+\end{enumerate}
+\item\colorbox{lightgray}{\consolas turtle.begin\_fill()}
+\begin{enumerate}
+\item To be called just before drawing a shape to be filled.
+\end{enumerate}
+\\
+\item\colorbox{lightgray}{\consolas turtle.end\_fill())}
+\begin{enumerate}
+\item Stop filling in any shapes created after this line. Called after a call to \colorbox{lightgray}{\consolas begin\_fill()}.
+\end{enumerate}
+\item\colorbox{lightgray}{\consolas turtle.fillcolor(color)}
+\begin{enumerate}
+\item Set fillcolor to \emph{color}.
+\end{enumerate}
+\end{enumerate}
+If you would like to learn more about turtles, here is a link to the full documentation:
+\newline\textcolor{blue}{\underline{https://docs.python.org/3/library/turtle.html}}.
+
+
+
+\end{document}

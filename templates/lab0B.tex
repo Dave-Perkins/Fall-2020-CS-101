@@ -1,0 +1,202 @@
+% TURTLE 2
+\documentclass[11pt, letterpaper, onecolumn, oneside, final]{article}
+
+\usepackage{lab}
+\usepackage{soul}
+
+\newfontfamily{\consolas}{Consolas}
+[Extension = .ttf]
+%\usepackage{fontspec}
+
+\DocumentTitle {Lab 0B}
+\DocumentSubtitle {Calculations!}
+% End of preamble
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\maketitle
+
+% MAKE SURE TO SAVE THIS LAB IN A LABS FOLDER
+ In this lab you will learn about the default Python arithmetic structures and be introduced basic Python data types.
+\begin{enumerate}
+\item Predict the result of each of the following lines. Verify by typing each line into your shell window in Thonny. If you need a reminder of what that is, refer back to the Thonny Information sheet on your Piazza class page. What do each of these operators do? 
+\begin{enumerate}
+    \item {\consolas 5 * 6}\\
+    \\
+    \item {\consolas 11 / 7}\\
+    \\
+    \item {\consolas 11 \% 7}\\
+    \\
+    \item {\consolas 3 ** 2}\\
+    \\
+%anymore modulus stuff? 7%5, 12%5, 17%5, etc? to see what it really does
+\end{enumerate}
+\item In your shell window type: {\consolas apples = 11}. Type each of the following in the shell window and record the result.
+
+\begin{enumerate}
+    \item {\consolas apples / 2}
+    \item {\consolas apples // 2}
+    \item {\consolas apples / 3}
+    \item {\consolas apples // 3}
+    \item What operation does the {\consolas //}  represent? How is it different from the {\consolas /} operation?\\
+    \\
+\end{enumerate}
+\textbf{Discuss with us your answers and get a sticker!}
+
+\newpage
+\item What are the types, and, where possible to determine, values of the Python expressions below? When it isn’t possible to determine the value, write N/A. 
+\begin{enumerate}
+    \item {\consolas 23 + 8}\hfill has value \rule{4cm}{.15mm} and type \rule{4cm}{.15mm}
+    \item {\consolas 3.5 - 1.1}\hfill has value \rule{4cm}{.15mm} and type    \rule{4cm}{.15mm}
+    \item {\consolas 2 * 3.1}\hfill has value \rule{4cm}{.15mm} and type \rule{4cm}{.15mm}
+    \item {\consolas 17 / 5.0}\hfill has value \rule{4cm}{.15mm} and type \rule{4cm}{.15mm}
+    \item {\consolas 2 + 6.4 / 2}\hfill has value \rule{4cm}{.15mm} and type \rule{4cm}{.15mm}
+    \item {\consolas 3 * '12'} \hfill has value \rule{4cm}{.15mm} and type \rule{4cm}{.15mm}
+    \item {\consolas 'a' + 'b' * 3}\hfill has value \rule{4cm}{.15mm} and type \rule{4cm}{.15mm}
+\end{enumerate}
+\textbf{Chat with a TA or professor and get a sticker!}
+
+\item Predict the data type of each of the following. You can use {\consolas type()} with the expression between the parentheses in your shell window to check your prediction. You may see some types that we have not yet covered. Ask us to explain anything that surprises you.
+\begin{enumerate}
+    \item {\consolas 2 * 3.0}
+    \item {\consolas 'Python'}
+    \item {\consolas len('Python')}
+    \item {\consolas ['P', 'y', 't', 'h', 'o', 'n']}
+    \item {\consolas ('P', 'y', 'thon')}
+    \item {\consolas 2 * 3 * 'h'}
+    \item {\consolas 2 * '3' + 'h'}
+    \item {\consolas 5 < 6}
+    \item {\consolas input('Enter the temperature: ')}
+\end{enumerate}
+\textbf{Check your answers with us and get a sticker!}
+
+
+
+\item For each of the following values, choose the most appropriate data type for representing the data. Explain your reasoning.
+
+\begin{enumerate} 
+    \item  The distance from the Earth to the Moon in meters\\
+    \\
+    \item  The size of a monitor in pixels\\
+    \\
+    \item  The name of a pet\\
+    \\
+    \item The number of characters in a string\\
+    \\
+    \item A child’s bedtime\\
+    \\
+    \item The square root of a number\\
+    \\
+    \item A vehicle identification number\\
+    \\
+    \item An account balance\\
+\end{enumerate}
+\textbf{Discuss your answers with us and get a sticker!}
+\item To get used to dealing with assigning and manipulating variables, predict what each of the following lines of code will do and then check your prediction by entering the code line by line into the shell window.
+
+\begin{enumerate}
+    \item {\consolas myNumber = 15 \\ myNumber\\}
+    \item {\consolas myNumber + 10 \\
+    myNumber\\}
+    \item {\consolas myNumber += 10 \\ myNumber\\}
+    \item {\consolas myNumber \\ myNewNumber = myNumber \\myNumber = 200\\ myNumber\\myNewNumber\\}
+    \item {\consolas myNumber = myNewNumber + 50 \\ myNewNumber += 10 \\myNumber\\myNewNumber\\}
+\end{enumerate}
+
+
+\item Before you start this exercise, type the following command into your shell window: {\consolas import math}. Type each of the following into your shell window and record the result. 
+\begin{enumerate}
+    \item {\consolas math.ceil(3.14159)}
+    \item {\consolas math.floor(3.14159)}
+    \item {\consolas math.round(3.14159,1)}
+    \item {\consolas math.round(3.14159,2)}
+    \item {\consolas math.round(3.14159,3)}
+\end{enumerate}
+Based on your responses above, describe the function each of the following and what each variable represents.
+\begin{enumerate}
+    \item {\consolas math.ceil(n)}:\\
+    \item {\consolas math.floor(n)}:\\
+    \item {\consolas round(n1, n2)}:\\
+\end{enumerate}
+\textbf{Discuss with us your answers and get a sticker!}
+
+\item
+For each of the following exercises, check the output using your shell window and record your answer. Begin by entering the following list:  {\consolas ProfessorList = ["Bailey","Helmuth", "Perkins","Strash", "Campbell"]}
+\begin{enumerate}
+    \item {\consolas ProfessorList[1]}\\
+    \item {\consolas ProfessorList[0]}\\
+    \item {\consolas len(ProfessorList)}\\
+    \item {\consolas ProfessorList[-1]}\\
+    \item {\consolas ProfessorList[-2]}\\
+    \item {\consolas ProfessorList.index("Perkins")}\\
+    
+\end{enumerate}
+
+\item
+For each of the following exercises, check the output using your shell window and record your answer. Begin by assigning a string of your Lab Professor's name (including `Professor') to the variable {\consolas Professor}. (Hint: if you need help, look at question 6!) Note that this question should be very similar to the question above.
+\begin{enumerate}
+    \item {\consolas Professor[1]}\\
+    \item {\consolas Professor[0]}\\
+    \item {\consolas len(Professor)}\\
+    \item {\consolas Professor[-1]}\\
+    \item {\consolas Professor[-2]}\\
+    \item {\consolas Professor.find(" ")}\\
+    
+\end{enumerate}
+\textbf{Discuss with us your answers and get a sticker!}
+%%%%%%%%%%%%%%%%%
+%   INDEXING    %
+%%%%%%%%%%%%%%%%%
+%\newpage
+\\\\\
+Now create a new file titled {\consolas lab1.py}. For the remainder of this lab you will be working in this file. This means type all code in the editor not the shell, and then run it using the green arrow in the upper left. 
+\item Type this code into your editor.\\
+\\
+    %\colorbox{lightgray}{\parbox{.88\textwidth}{\consolas colorList = ["blue","green","red","purple","orange","yellow","black"]\\
+    %listLen = len(colorList)\\
+    %\\
+   % for x in range(70):\\
+   % \hspace*{6mm} print(colorList[x])}}\\
+   % \\
+   % \begin{enumerate}
+    %\item Why does this code throw an error and what do the brackets do? (Hint: Try printing out {\consolas x} and see how that compares to the length of {\consolas colorList}).\\
+   % \\
+   % \end{enumerate}
+    %\item Change your code to match what is given below.\\
+   % \\
+    \colorbox{lightgray}{\parbox{.88\textwidth}{\consolas colorList = ["blue","green","red","purple","orange","yellow","black"]\\
+    listLen = len(colorList)\\
+    \\
+    for x in range(70):\\
+    \hspace*{6mm} print(colorList[x \% colorLen])}}\\
+    \\
+    \begin{enumerate}
+        \item 
+    How many times does this loop through {\consolas colorList}? Why would this work, but part (a) did not? \\
+    \item
+    Brainstorm some ways you could use this concept in your Turtles project!\\
+    \\
+    \end{enumerate}
+    
+    \item Change your code to match the block below.\\
+    \\
+    \colorbox{lightgray}{\parbox{.88\textwidth}{\consolas import random\\
+    colorList = ["blue","green","red","purple","orange","yellow","black"]\\
+    listLen = len(colorList)\\
+    \\
+    for x in range(70):\\
+    \hspace*{6mm} print(random.choice(colorList))}}\\
+    \\
+    \begin{enumerate}
+        \item How does the output of this block of code differ from the output from 7(b)? \\\\
+        \item What does random.choice() do?\\\\
+        \item Brainstorm some ways you could use this concept in your Turtles project!\\
+        \\\\
+    \end{enumerate}
+\textbf{Show a TA or Professor your progress and get a sticker!}
+
+\end{enumerate}
+
+
+\end{document}

@@ -1,0 +1,82 @@
+\documentclass[11pt, letterpaper, onecolumn, oneside, final]{article}
+
+\usepackage{lab}
+\usepackage{soul}
+
+\newfontfamily{\consolas}{Consolas}[Extension = .ttf]
+
+\DocumentTitle {Project 4}
+\DocumentSubtitle {Image Manipulation!}
+% End of preamble
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+    \maketitle
+
+    %\duedate{Weekday assigned: 0-6}{Week assigned: 0}{Weekday due:0-6}{Week due: 1}{Time due: 10:00 p.m.}
+    \duedate{4}{0}{0}{3}{10:00 p.m.}
+
+
+    \section{Collaboration.} Reminder of the collaboration policy: you may discuss the ideas of the project, but cannot share code or look at another student’s code. If you discuss, cite. More details are in the course syllabus. 
+
+    \section{Introduction.} In this project, you will be exploring the {\consolas pillow} module in order to manipulate images in some sort of creative and innovative way. 
+     
+    \section{What to do.} %Begin by downloading the necessary skeleton code ({\consolas language.py}) found on the resources page on the class Piazza page. You can find them on the Resources page under Projects. Place them in a Project2 folder in the Projects folder in your CS101 directory.
+    
+    Create a file {\consolas images.py} in Thonny and begin the project. You will need this statement to import the image manipulation techniques. Be sure to save regularly, in case of any mishaps. Make sure to pay attention to the comments already in the file. Make sure you import both the {\consolas pillow} and {\consolas os} modules, as you did at the beginning of Lab 4A.\\
+    \\
+  Your task is to implement a series of at least three tools that can be used to manipulate/analyze an image in some way using the {\consolas pillow} module. Each tool in your project must work with images on a pixel-to-pixel level (i.e it must loop through all pixels in an image). Projects that do not adhere to this standard will be penalized.  \\
+  \\
+  You can design any tool that you would like that uses the {\conslas pillow} module and a general pixel-based structure. If you are struggling to come up with ideas, some tools you might implement include:
+  \begin{itemize}
+    \item \textbf{Blur}: Create a tool that blurs a given image. This is done by returning a new image in which every pixel is altered by its immediate neighbors.
+    (Hint: Every pixel has up to 8 neighbors.)
+    \item \textbf{Color Palette}: Break an image into smaller components. Determine the most prevalent color in that area of the image. Return a new image in which that area represents the most prevalent color. Repeat for the entire image.
+    \item \textbf{Invert/Negate}: Create a tool that inverts/negates the colors of an image. 
+    \item \textbf{A filter of your choice}: Create a filter that alters the colors of an image in some capacity. Should be more complex than, for example, just making all the pixels red or turning all red pixels to blue. 
+    \item \textbf{Grayscale}: Create a tool that makes an image black and white. (Hint: The grayscale value is determined by the intensity of a given RGB pixel.)
+    \item \textbf{Color Selection}: Given a color (red, green, or blue), return an image in which only the pixels that are predominantly that color stay the same and the rest are muted in some capacity of your choosing.
+    \item \textbf{Mirror}: Create a tool that mirrors an image.
+    \item \textbf{Edge Detection}: Create a tool that implements basic edge detection. If the difference between the colors of two adjacent pixels is outside a certain range that you deem `close', these two pixels create an edge and you must mark this in some way. 
+    \item \textbf{Green Screening}: Create a tool that implements a basic green screen effect. Given an image with a background of a single color, replace the background with a new image.
+    \item \textbf{Random Collage Generation}: Create a tool that creates a random collage from a folder of images. (Hint: This is done using the {\consolas random} module.)
+  \end{itemize}
+  \\
+  You may use anything from labs and lecture to work on your project and you may need to do some further research about the tools listed above, but be sure to cite when necessary. If you would like further documentation on the {\consolas
+  pillow} module, visit 
+  \\ \textcolor{blue}{\underline{https://pillow.readthedocs.io/en/stable/reference/Image.html\#module-PIL.Image}}. 
+  \\ As a reminder, here is what a citation should look like: \\ 
+    \\
+    \indent{\consolas \# CITE: https://docs.python.org/3/library/turtle.html}\\
+    \indent{\consolas \# DETAILS: Looked up how to change the background color.}\\ 
+    \\
+    Your final product should demonstrate your understanding of nested loops, grids, RGB manipulation, advancing indexing, and the {\consolas pillow} module.
+    Submissions that reflect a deeper understanding or more interesting use of these techniques will be graded more favorably. Some options to display a more advanced grasp on the topics include:
+\begin{itemize}
+    \item Use of {\consolas pillow} functions not taught in lab
+    \item Creative image analysis techniques not described above
+    \item Unique use of nested loops for more complex procedures
+    \item Applications of Lab 3B material.
+\end{itemize}
+    Refer to the grading rubric for more grading information.
+    
+\section{How to submit.}
+
+    Submit your project to Gradescope using the standard course submission procedures. 
+    \section{Grading Rubric:} 
+    \begin{enumerate}
+        \item \textbf{Creativity}: Don't just stick to the project ideas given above, but rather use those as a starting point of what you could do. Aim to expand on those ideas and/or integrate them into an original idea of your own.
+        \item \textbf{Effective use of {\consolas pillow} methods}: Display that you not only know how to use this module, but you know how to use it in order to achieve a particular goal. 
+        \item \textbf{Application of grids}: Display an understanding of what a grid is, and how to access and manipulate its elements.
+        \item \textbf{Advanced Looping Structures}: Demonstrates a more advanced understanding of looping structures than required in previous projects, such as more intricate for loops and while loops.
+
+    \end{enumerate}
+    \section{Important Notes:} 
+    \begin{enumerate}
+        \item A satisfactory project will incorporate the {\consolas pillow} module completely and consistently. The quality of your tools is worth as much as the quantity; we would rather see three high-quality tools than four mediocre ones. The effective use of computer science concepts is worth more than the overall aesthetic of the final output. We want to see you experiment and be creative with both your final project \emph{and} the code that you use to produce it. The amount of effort put into this project will be clear, and the project will be graded accordingly.
+        \item You must be able to explain your code in a reasonable amount of detail to the grader that you will be meeting with. This will demonstrate to them that you understand the code that you have written. If you are unable to talk through your code, it is probably a sign that you need to visit TA hours or stop into your Professor's office hours for clarification. 
+    \end{enumerate}
+
+    
+\end{document}

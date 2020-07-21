@@ -1,0 +1,82 @@
+\documentclass[11pt, letterpaper, onecolumn, oneside, final]{article}
+
+\usepackage{lab}
+\usepackage{soul}
+
+\newfontfamily{\consolas}{Consolas}[Extension = .ttf]
+
+\DocumentTitle {Project 3}
+\DocumentSubtitle {DNA Matching!}
+% End of preamble
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+    \maketitle
+
+    %\duedate{Weekday assigned: 0-6}{Week assigned: 0}{Weekday due:0-6}{Week due: 1}{Time due: 10:00 p.m.}
+    \duedate{4}{0}{0}{3}{10:00 p.m.}
+
+
+    \section{Collaboration.} Reminder of the collaboration policy: you may discuss the ideas of the project, but cannot share code or look at another student’s code. If you discuss, cite. More details are in the course syllabus. 
+
+    \section{Introduction.} In this project, you will be matching given strands of DNA against a database of known DNA. \\ 
+    \\
+    DNA is a sequence of nucleotide molecules. These nucleotides are made of for main bases: adenine (denoted as A), cytosine (denoted as C), guanine (denoted as G), and thymine (denoted as T). While some portions of this sequence of molecules are very similar across the human species, there are some regions in which DNA differs dramatically. Short Tandem Repeats (known as STRs) are one place in which there tends to be great diversity. These STRs are short sequences of the four bases that repeat over and over at certain places in the DNA strand. The amount of times that these STRs repeat is vastly different between unique individuals, meaning looking at these STR runs is a valid means to compare the DNA of different people. \\
+    \\
+    
+ In the DNA samples below, for example, Alice has the STR {\consolas AGAT} repeated 28 consecutive times in her DNA, Bob has it repeated 17 consecutive times, and Charlie has it repeated 36 consecutive times. The other STR runs ({\consolas AATG} and {\consolas TATC}) are displayed in a similar fashion. Alice also has {\consolas AATG} back-to-back 42 times in one section of her DNA. This 42 means that there the sequence {\consolas AATG} occurs 42 times \textbf{in a row} at some point in Alice's DNA and that any other run of {\consolas AATG} STRs in her DNA is \textbf{shorter} than 42 repetitions in length. Note that these numbers  give the length of \textbf{continuous} repetitions. For example, {\consolas AATGAATG} would have length of 2. The sequence {\consolas AATGCAATG}, however, would be two separate sequences of length one because the occurrences of {\consolas AATG} are separated by a {\consolas C} base, making these two {\consolas AATG} occurrences \textbf{nonconsecutive}.
+\begin{lstlisting}
+                name,     AGAT,  AATG,  TATC
+                Alice,     28,    42,    14
+                Bob,       17,    22,    19
+                Charlie,   36,    18,    25
+\end{lstlisting}
+
+The following sequence should match with Alice:
+\begin{center}
+{\consolas AGACGGGTTACCATGACTATCTATCTATCTATCTATCTATCTATCTATCACGTACGTACGTA\\TCGAGATAGATAGATAGATAGATCCTCGACTTCGATCGCAATGAATGCCAATAGACAAAATT}.
+\end{center}
+%Your program should prompt the user to input the name of a text file containing the DNA sequence you want to match to someone in the database. Your program should also prompt the user to input the filename for the database.  
+\newpage
+    \section{What to do.}
+    
+    Create a file {\consolas DNA.py} in Thonny. Place it in a Project3 folder in your Projects folder in your CS101 directory and begin the project. Don't forget to import the {\consolas csv} module, like we did at the beginning of lab 3A. Also download the {\consolas database.csv} file as well as the various DNA sequence text files from the Piazza page. Make sure the .csv and .txt  files are in the \textbf{same} folder as your {\consolas DNA.py} file. \\
+    \\
+    For this project you will need to write a program that given a DNA sequence and a CSV database containing peoples names and maximum STR run lengths (the longest continuous sequence of that STR pattern) per person. From this sequence and database you will need to match one of the people in the database to the strand and then output who it is. If no one matches the given input, report "No Match!".
+    Your program should prompt the user to input the name of a text file containing the DNA sequence you want to match to someone in the database. Your program should also prompt the user to input the filename for the database. To pull the data from the CSV you will have to use the {\consolas csv} package in order to parse out all the relevant information to compare to the DNA sequence, as we did in Lab 3A. You may also parse it without using the {\consolas csv} module, but this is not necessary. 
+    \\
+    
+    A sample run of the code using the DNA strand can be seen below. Note that underlined text is entered by the user. \\
+
+ \hspace*{10mm}{\consolas Please enter the filename of the DNA database: \underline{dna.csv}} \\
+  \hspace*{10mm}{\consolas Please enter the filename of the test strand: \underline{testcase.txt}} \\
+ \hspace*{10mm}{\consolas Alice} \\
+
+
+  \\
+  You may use anything from labs and lecture to work on your project and you may need to do some further research , but be sure to cite when necessary.
+  \\ As a reminder, here is what a citation should look like: \\
+    \\
+    \indent{\consolas \# CITE: https://docs.python.org/3/library/turtle.html}\\
+    \indent{\consolas \# DETAILS: Looked up how to change the background color.}\\ 
+    \\
+    Refer to the grading rubric for more grading information.
+    
+\section{How to submit.}
+
+    Submit your project to Gradescope. However, this time when you submit your code to Gradescope, the program will be subjected to a battery of automatic tests, which can help you determine the correctness of your program. For each test, your program will be run with different inputs, and the output will be compared to the correct output. If you pass a test, you will just see the inputs and that the test ``PASSED''. If you fail a test, it will say ``FAILED'', and will show you what your program printed and what it should have printed. Note that the testing is very particular---you must have every space and punctuation correct to pass the tests! 
+    
+    You can submit a project at any time before the deadline, even multiple times. We only grade the latest submission.
+    \section{Grading Rubric:} 
+    \begin{enumerate}
+        \item 
+
+    \end{enumerate}
+    \section{Important Notes:} 
+    \begin{enumerate}
+        \item This project will be different than all the other projects you have been assigned so far. Up until now you have had open ended projects meant to encourage exploration of what code can do. This project is designed to be similar to those of other CS courses so that you can get a taste of what it would be like to continue in the department. In this project you will be given a specific task and will be expected to use the tools you've been taught during this course to accomplish this task. While there are many ways to produce a correct output there is only one correct output per input.
+    \end{enumerate}
+
+    
+\end{document}
